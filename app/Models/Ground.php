@@ -42,6 +42,16 @@ class Ground extends Model
     }
 
     /**
+     * Distances from this ground to every other ground.
+     *
+     * @return HasMany<Distance, $this>
+     */
+    public function distances(): HasMany
+    {
+        return $this->hasMany(Distance::class, 'from_ground_id');
+    }
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
