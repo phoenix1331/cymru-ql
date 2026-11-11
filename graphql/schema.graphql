@@ -1,0 +1,81 @@
+"An ISO 8601 date, e.g. `2026-08-01`."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+"An ISO 8601 date and time with offset, e.g. `2026-08-01T13:30:00+00:00`."
+scalar DateTimeTz @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTimeTz")
+
+type Query {
+    "Every season, newest first."
+    seasons: [Season!]! @all @orderBy(column: "starts_on", direction: DESC)
+
+    "A season by slug, e.g. `2026-27`."
+    season(slug: String! @eq): Season @find
+
+    "The three leagues in scope, by tier."
+    leagues: [League!]! @all(scopes: ["ordered"])
+
+    "A club by slug, e.g. `caernarfon-town`."
+    club(slug: String! @eq): Club @find
+
+    "Every club, alphabetically."
+    clubs: [Club!]! @paginate @orderBy(column: "name")
+
+    "A ground by slug, e.g. `the-oval-caernarfon`."
+    ground(slug: String! @eq): Ground @find
+
+    "Every ground, alphabetically."
+    grounds: [Ground!]! @paginate @orderBy(column: "name")
+}
+
+"A football season, August to May."
+type Season {
+    slug: String!
+    name: String!
+    startsOn: Date! @rename(attribute: "starts_on")
+    endsOn: Date! @rename(attribute: "ends_on")
+    isCurrent: Boolean! @rename(attribute: "is_current")
+}
+
+"A league in the Welsh pyramid. Tier 1 is the Cymru Premier."
+type League {
+    slug: String!
+    name: String!
+    tier: Int!
+    region: String!
+}
+
+"A football ground. Some grounds are shared by more than one club."
+type Ground {
+    slug: String!
+    name: String!
+    town: String!
+    latitude: Float!
+    longitude: Float!
+    capacity: Int
+    opened: Int
+    address: String
+    description: String
+    "Clubs that play their home games here."
+    clubs: [Club!]! @hasMany
+}
+
+"A football club."
+type Club {
+    slug: String!
+    name: String!
+    nickname: String
+    "Primary club colour as a hex value, e.g. `#F1B434`."
+    colour: String!
+    founded: Int
+    ground: Ground! @belongsTo
+    "League membership by season."
+    seasons: [ClubSeason!]! @hasMany(relation: "clubSeasons")
+}
+
+"A club's league for one season, with its final position once the season is over."
+type ClubSeason {
+    club: Club! @belongsTo
+    season: Season! @belongsTo
+    league: League! @belongsTo
+    position: Int
+}

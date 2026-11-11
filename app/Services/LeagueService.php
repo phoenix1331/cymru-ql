@@ -16,7 +16,7 @@ final class LeagueService
      */
     public function all(): Collection
     {
-        return League::query()->orderBy('tier')->orderBy('name')->get();
+        return League::query()->ordered()->get();
     }
 
     public function find(string $slug): League

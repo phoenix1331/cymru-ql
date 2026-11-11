@@ -131,3 +131,27 @@ Accept: application/json
 
 GET {{baseUrl}}/api/fixtures/1/events
 Accept: application/json
+
+### GraphQL
+
+# One request for a club, its ground and its league history.
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "query ($slug: String!) { club(slug: $slug) { name nickname colour founded ground { name town capacity } seasons { position season { name } league { name tier } } } }",
+  "variables": { "slug": "caernarfon-town" }
+}
+
+###
+
+# A page of clubs with their grounds. Relations are batch loaded: two queries
+# however many clubs are on the page.
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "{ clubs(first: 48) { data { name ground { name town } } paginatorInfo { total } } }"
+}

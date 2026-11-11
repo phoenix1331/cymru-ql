@@ -28,7 +28,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Domain services | `app/Services/` | Shared by REST and GraphQL so the comparison is fair: `SeasonService` (slug or current), `LeagueService`, `ClubService` (paginate, history), `GroundService` (nearby, distances in league), `FixtureService` (`FixtureFilters`), `LeagueTableService` (`TableRow`) |
 | Query metrics | `app/Support/QueryMetrics.php`, `app/Http/Middleware/RecordQueryMetrics.php` | `DB::listen` counts queries per request; middleware (on the `api` group, alias `query.metrics`) adds `X-Query-Count`, `X-Query-Time-Ms`, `X-Response-Time-Ms`, `Server-Timing`. Toggle: `CYMRU_METRICS` |
 | REST | `routes/api.php` (`/api`, wired in `bootstrap/app.php`, no Sanctum), `app/Http/Controllers/Api/`, `app/Http/Resources/` | Resource oriented: own fields plus slug/name references and `links` to related resources, no deep nesting. Slugs in URLs resolved via services (404 JSON when unknown). Endpoints: seasons, leagues, league table (`meta.basis`: results or final_positions), clubs, club seasons, grounds, nearby grounds, distances in a league (away trips with total), distance between two grounds, fixtures (filters: season, league, club, status, dates, round) and match events. Examples in `request.http` |
-| GraphQL | `graphql/schema.graphql` (Lighthouse) | Schema first, batch loading toggle, complexity and depth limits |
+| GraphQL | `graphql/schema.graphql` (Lighthouse 6, `/graphql`), `config/lighthouse.php` | Schema first. Simple lookups use `@find`, `@all`, `@paginate` (default 20, max 100) and relation directives (`@belongsTo`, `@hasMany`, batch loaded); derived data goes through the shared services. Same query-metrics middleware as REST. Tests use `MakesGraphQLRequests` |
 | Live feed | Lighthouse subscriptions over Reverb | Fixture simulator command pushes match events |
 
 ## Decisions
@@ -43,6 +43,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Match events store the score after each event | Live feed and timelines can render any event without replaying the match |
 | Results seeded per fixture (`crc32(seed, season, home, away)`) | Same results on every install and every rerun, independent of generation order; only the as-of date decides what has been played |
 | REST responses reference rather than embed | Typical REST shape, so a screen needing related data makes several requests; that cost is what the comparison panel shows against one GraphQL query |
+| GraphQL lookups via directives, derived data via services | `@find`/`@paginate` issue the same Eloquent queries the services would; tables, distances and fixture filters reuse the service classes so both APIs compute identically |
 | League table computed in PHP from finished fixtures | Two queries, portable across MySQL and SQLite; seasons without fixtures fall back to recorded final positions with null stats |
 | Simulated fixtures by default | No API keys needed to run; TheSportsDB is an optional extra |
 | Hooks activated by `npm run prepare` | Laravel's `.npmrc` sets `ignore-scripts=true`, so `npm install` skips Husky's `prepare` script; `composer setup` will call it |
