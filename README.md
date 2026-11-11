@@ -1,5 +1,8 @@
 # CymruQL
 
+<img width="3148" height="1652" alt="Screenshot 2026-11-11 211307" src="https://github.com/user-attachments/assets/22f0041b-68fd-4f3c-9396-761d12b04cca" />
+
+
 Welsh football data (Cymru Premier, North and South) served over both REST and GraphQL from one Laravel 13 app, with a React UI that shows what each API costs side by side: requests, payload, timing and database queries.
 
 ## What this demonstrates
