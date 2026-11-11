@@ -47,3 +47,33 @@ Accept: application/json
 # A shared ground lists both clubs that play there.
 GET {{baseUrl}}/api/grounds/centre-for-sporting-excellence-ystrad-mynach
 Accept: application/json
+
+### Seasons
+
+# Seasons, newest first. One is marked current.
+GET {{baseUrl}}/api/seasons
+Accept: application/json
+
+### Leagues
+
+# The three leagues in scope, by tier.
+GET {{baseUrl}}/api/leagues
+Accept: application/json
+
+###
+
+# One league with links to its table and clubs.
+GET {{baseUrl}}/api/leagues/cymru-north
+Accept: application/json
+
+###
+
+# Current season table, calculated from simulated results (meta.basis = results).
+GET {{baseUrl}}/api/leagues/cymru-premier/table
+Accept: application/json
+
+###
+
+# Past season table from recorded final positions (meta.basis = final_positions).
+GET {{baseUrl}}/api/leagues/cymru-south/table?season=2025-26
+Accept: application/json
