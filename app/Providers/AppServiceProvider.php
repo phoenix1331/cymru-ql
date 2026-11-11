@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Data\DataFiles;
+use App\Enums\FixtureStatus;
+use App\Enums\MatchEventType;
 use App\Import\Distances\OsrmClient;
 use App\Import\Enrichment\NominatimClient;
 use App\Import\Enrichment\WikidataClient;
@@ -12,9 +14,11 @@ use App\Simulation\ClubRatings;
 use App\Simulation\MatchSimulator;
 use App\Simulation\SeasonGenerator;
 use App\Support\QueryMetrics;
+use GraphQL\Type\Definition\PhpEnumType;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
+use Nuwave\Lighthouse\Schema\TypeRegistry;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -60,8 +64,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(TypeRegistry $types): void
     {
+        $types->register(new PhpEnumType(FixtureStatus::class));
+        $types->register(new PhpEnumType(MatchEventType::class));
+
         DB::listen(fn (QueryExecuted $query) => $this->app->make(QueryMetrics::class)->record($query->time));
     }
 }

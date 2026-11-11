@@ -39,6 +39,20 @@ type Query {
         league: String
         season: String
     ): [Distance!]! @field(resolver: "App\\GraphQL\\Queries\\NearbyGroundsQuery")
+
+    "Fixtures for a season (current by default) in kick off order, with optional filters."
+    fixtures(
+        season: String
+        league: String
+        club: String
+        status: FixtureStatus
+        from: DateTimeTz
+        to: DateTimeTz
+        round: Int
+    ): [Fixture!]! @paginate(builder: "App\\GraphQL\\Queries\\FixturesQuery")
+
+    "A fixture by id."
+    fixture(id: ID! @eq): Fixture @find
 }
 
 "A football season, August to May."
@@ -134,4 +148,36 @@ type Distance {
     to: Ground! @belongsTo(relation: "toGround")
     roadKm: Float! @rename(attribute: "road_km")
     straightKm: Float! @rename(attribute: "straight_km")
+}
+
+"A match between two clubs. Scores are null until it kicks off."
+type Fixture {
+    id: ID!
+    round: Int!
+    kicksOffAt: DateTimeTz! @rename(attribute: "kicks_off_at")
+    status: FixtureStatus!
+    "Match minute while live, 90 once finished."
+    minute: Int
+    homeScore: Int @rename(attribute: "home_score")
+    awayScore: Int @rename(attribute: "away_score")
+    homeClub: Club! @belongsTo
+    awayClub: Club! @belongsTo
+    ground: Ground! @belongsTo
+    league: League! @belongsTo
+    season: Season! @belongsTo
+    "Kick off, goals, cards, half time and full time, in match order."
+    events: [MatchEvent!]! @hasMany
+}
+
+"Something that happened in a match, with the score after it."
+type MatchEvent {
+    id: ID!
+    type: MatchEventType!
+    minute: Int!
+    homeScore: Int! @rename(attribute: "home_score")
+    awayScore: Int! @rename(attribute: "away_score")
+    description: String
+    "The club the event belongs to; for an own goal, the club credited with it."
+    club: Club @belongsTo
+    fixture: Fixture! @belongsTo
 }

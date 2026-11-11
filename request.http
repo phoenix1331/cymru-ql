@@ -190,3 +190,14 @@ Accept: application/json
 {
   "query": "{ nearbyGrounds(ground: \"park-hall-oswestry\", limit: 5) { roadKm straightKm to { name town } } }"
 }
+
+###
+
+# This season's results for one club, with match events, in one request.
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "{ fixtures(club: \"caernarfon-town\", status: Finished, first: 5) { data { round kicksOffAt homeClub { name } awayClub { name } homeScore awayScore events { minute type description } } paginatorInfo { total } } }"
+}
