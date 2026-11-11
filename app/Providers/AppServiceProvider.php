@@ -11,6 +11,9 @@ use App\Import\Enrichment\WikidataClient;
 use App\Simulation\ClubRatings;
 use App\Simulation\MatchSimulator;
 use App\Simulation\SeasonGenerator;
+use App\Support\QueryMetrics;
+use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(QueryMetrics::class);
+
         $this->app->bind(
             DataFiles::class,
             fn (): DataFiles => new DataFiles((string) config('cymru.data_path')),
@@ -57,6 +62,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        DB::listen(fn (QueryExecuted $query) => $this->app->make(QueryMetrics::class)->record($query->time));
     }
 }

@@ -25,6 +25,14 @@ return [
     | User agent sent to Wikidata and Nominatim by `cymru:import --enrich`.
     | Both services ask for an identifying user agent; set your own here.
     */
+    /*
+    | Query count and timing headers (and GraphQL extensions) used by the
+    | comparison panel. Cheap enough to leave on; switch off to hide them.
+    */
+    'metrics' => [
+        'enabled' => (bool) env('CYMRU_METRICS', true),
+    ],
+
     'simulation' => [
         // Fixed seed so every install simulates the same results.
         'seed' => (int) env('CYMRU_SIMULATION_SEED', 1331),

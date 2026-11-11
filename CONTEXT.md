@@ -26,6 +26,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Seeders | `database/seeders/` | One per JSON file, idempotent `upsert` keyed on slugs; `SlugLookup` resolves slugs to ids and fails on unknown references. `migrate --seed` loads everything in about 2 s |
 | Simulation | `app/Simulation/` | `RoundRobin` (double, circle method), `MatchSimulator` (Poisson goals, cards, seeded per fixture), `ClubRatings` (previous season finish), `SeasonGenerator` (weekly Saturday 14:30 UK rounds, results before an as-of moment). Run by `FixtureSeeder` |
 | Domain services | `app/Services/` | Shared by REST and GraphQL so the comparison is fair: `SeasonService` (slug or current), `LeagueService`, `ClubService` (paginate, history), `GroundService` (nearby, distances in league), `FixtureService` (`FixtureFilters`), `LeagueTableService` (`TableRow`) |
+| Query metrics | `app/Support/QueryMetrics.php`, `app/Http/Middleware/RecordQueryMetrics.php` | `DB::listen` counts queries per request; middleware (on the `api` group, alias `query.metrics`) adds `X-Query-Count`, `X-Query-Time-Ms`, `X-Response-Time-Ms`, `Server-Timing`. Toggle: `CYMRU_METRICS` |
 | REST | `routes/api.php`, API Resources | |
 | GraphQL | `graphql/schema.graphql` (Lighthouse) | Schema first, batch loading toggle, complexity and depth limits |
 | Live feed | Lighthouse subscriptions over Reverb | Fixture simulator command pushes match events |
