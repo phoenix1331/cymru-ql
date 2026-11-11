@@ -57,6 +57,8 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Tests block stray HTTP | `Http::preventStrayRequests()` in `tests/Pest.php`; external APIs are always faked |
 | Visual identity | Chalk/slate/pitch green palette; REST is estuary blue `#2F6690`, GraphQL is Welsh red `#C8102E` everywhere. Barlow Condensed (signage/scoreboard) for headings and numbers, Atkinson Hyperlegible for body, via Bunny Fonts. Tokens in `resources/css/app.css` `@theme` |
 | GraphQL client: urql + graphql-codegen client preset | User choice (urql over Apollo). `npm run codegen` writes the Lighthouse schema to `resources/js/graphql/lighthouse-schema.graphql` (via the `codegen` filesystem disk) and typed documents to `resources/js/graphql/generated/`; both committed so the front end builds without PHP. A Pest test fails if the committed schema drifts. All documents live in `resources/js/graphql/documents.ts` |
+| REST client: TanStack Query (`resources/js/api/rest.ts`, types in `restTypes.ts`) | User choice; gives REST the same caching and loading states urql gives GraphQL, so the comparison is about the APIs, not the client code |
+| One instrumented transport (`resources/js/api/instrumentedFetch.ts`, `recorder.ts`) | REST and urql both fetch through it; it records method, URL, body, status, bytes, browser timing and server query metrics per screen load (`useScreenLoad` in a layout effect, before data hooks fire). API source and batch loading live in `api/settings.ts` (localStorage) |
 | Generated placeholder crests | Avoid shipping third-party club badges |
 
 ## Commands
