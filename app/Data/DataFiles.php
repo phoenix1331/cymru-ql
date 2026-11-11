@@ -23,6 +23,8 @@ final readonly class DataFiles
 
     public const string DISTANCES = 'distances.json';
 
+    public const string OVERRIDES = 'overrides.json';
+
     public function __construct(private string $directory) {}
 
     public function path(string $file): string

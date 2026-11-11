@@ -33,6 +33,26 @@ final readonly class ClubData
     }
 
     /**
+     * Returns a copy with any empty details filled from the given values.
+     */
+    public function withMissingDetails(?string $nickname = null, ?int $founded = null): self
+    {
+        return new self(
+            slug: $this->slug,
+            name: $this->name,
+            ground: $this->ground,
+            colour: $this->colour,
+            nickname: $this->nickname ?? $nickname,
+            founded: $this->founded ?? $founded,
+        );
+    }
+
+    public function fillMissingFrom(self $other): self
+    {
+        return $this->withMissingDetails($other->nickname, $other->founded);
+    }
+
+    /**
      * @return array{slug: string, name: string, ground: string, colour: string, nickname: ?string, founded: ?int}
      */
     public function toArray(): array

@@ -33,3 +33,19 @@ it('casts loosely typed values', function () {
 it('rejects rows with missing required keys', function () {
     LeagueData::fromArray(['slug' => 'cymru-north', 'name' => null]);
 })->throws(InvalidArgumentException::class, 'missing required keys: name, tier, region');
+
+it('fills only missing ground details', function () {
+    $ground = new GroundData('g', 'G', 'T', 51.0, -3.0, capacity: 500);
+    $other = new GroundData('g', 'G', 'T', 51.0, -3.0, capacity: 900, opened: 1920, address: 'Road, Town', description: 'Old ground.');
+
+    expect($ground->fillMissingFrom($other)->toArray())->toMatchArray([
+        'capacity' => 500, 'opened' => 1920, 'address' => 'Road, Town', 'description' => 'Old ground.',
+    ]);
+});
+
+it('fills only missing club details', function () {
+    $club = new ClubData('c', 'C', 'g', '#fff', nickname: 'The Cs');
+
+    expect($club->fillMissingFrom(new ClubData('c', 'C', 'g', '#fff', 'Other', 1901))->toArray())
+        ->toMatchArray(['nickname' => 'The Cs', 'founded' => 1901]);
+});

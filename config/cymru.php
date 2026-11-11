@@ -21,4 +21,10 @@ return [
     */
     'node_binary' => env('NODE_BINARY', 'node'),
 
+    /*
+    | User agent sent to Wikidata and Nominatim by `cymru:import --enrich`.
+    | Both services ask for an identifying user agent; set your own here.
+    */
+    'http_user_agent' => env('CYMRU_HTTP_USER_AGENT', 'laravel-data-import/1.0'),
+
 ];

@@ -4,17 +4,24 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Data\ClubData;
 use App\Data\DataFiles;
+use App\Data\GroundData;
 use App\Import\ClubImporter;
 use App\Import\ClubSeasonImporter;
+use App\Import\Enrichment\Enricher;
 use App\Import\OttConfigReader;
+use App\Import\Overrides;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
+use Illuminate\Http\Client\RequestException;
 use InvalidArgumentException;
 use RuntimeException;
 
-#[Signature('cymru:import {--source= : Path to the Over the Terraces src/data/cymru.js (defaults to OTT_CYMRU_PATH)}')]
+#[Signature('cymru:import
+    {--source= : Path to the Over the Terraces src/data/cymru.js (defaults to OTT_CYMRU_PATH)}
+    {--enrich : Fill gaps from Wikidata and OpenStreetMap (network access, slow)}')]
 #[Description('Regenerate database/data JSON from the Over the Terraces Cymru config')]
 final class CymruImport extends Command
 {
@@ -38,24 +45,90 @@ final class CymruImport extends Command
                 $current,
                 $files->leagues(),
             );
-        } catch (RuntimeException|InvalidArgumentException $exception) {
+            $clubs = $this->keepExistingClubDetails($files, $data['clubs']);
+            $grounds = $this->keepExistingGroundDetails($files, $data['grounds']);
+
+            if ($this->option('enrich')) {
+                $this->components->info('Enriching from Wikidata and OpenStreetMap (about one second per ground)...');
+
+                $enriched = app(Enricher::class)->enrich($clubs, $grounds);
+                [$clubs, $grounds] = [$enriched['clubs'], $enriched['grounds']];
+
+                $this->reportEnrichment($enriched['report']);
+            }
+
+            $overrides = $files->exists(DataFiles::OVERRIDES)
+                ? Overrides::fromArray($files->read(DataFiles::OVERRIDES))
+                : new Overrides;
+            $clubs = $overrides->applyToClubs($clubs);
+            $grounds = $overrides->applyToGrounds($grounds);
+        } catch (RuntimeException|InvalidArgumentException|RequestException $exception) {
             $this->components->error($exception->getMessage());
 
             return self::FAILURE;
         }
 
-        $files->writeRows(DataFiles::GROUNDS, $data['grounds']);
-        $files->writeRows(DataFiles::CLUBS, $data['clubs']);
+        $files->writeRows(DataFiles::GROUNDS, $grounds);
+        $files->writeRows(DataFiles::CLUBS, $clubs);
         $files->writeRows(DataFiles::CLUB_SEASONS, $memberships);
 
         $this->components->info(sprintf(
             'Imported %d clubs, %d grounds and %s league membership into %s.',
-            count($data['clubs']),
-            count($data['grounds']),
+            count($clubs),
+            count($grounds),
             $current->name,
             dirname($files->path(DataFiles::CLUBS)),
         ));
 
         return self::SUCCESS;
+    }
+
+    /**
+     * Re-importing must not lose details added by an earlier --enrich run.
+     *
+     * @param  list<ClubData>  $clubs
+     * @return list<ClubData>
+     */
+    private function keepExistingClubDetails(DataFiles $files, array $clubs): array
+    {
+        if (! $files->exists(DataFiles::CLUBS)) {
+            return $clubs;
+        }
+
+        $existing = collect($files->clubs())->keyBy('slug');
+
+        return array_map(
+            fn (ClubData $club): ClubData => $existing->has($club->slug) ? $club->fillMissingFrom($existing[$club->slug]) : $club,
+            $clubs,
+        );
+    }
+
+    /**
+     * @param  list<GroundData>  $grounds
+     * @return list<GroundData>
+     */
+    private function keepExistingGroundDetails(DataFiles $files, array $grounds): array
+    {
+        if (! $files->exists(DataFiles::GROUNDS)) {
+            return $grounds;
+        }
+
+        $existing = collect($files->grounds())->keyBy('slug');
+
+        return array_map(
+            fn (GroundData $ground): GroundData => $existing->has($ground->slug) ? $ground->fillMissingFrom($existing[$ground->slug]) : $ground,
+            $grounds,
+        );
+    }
+
+    /**
+     * @param  array{founded: int, ground_details: int, addresses: int, unmatched: list<string>}  $report
+     */
+    private function reportEnrichment(array $report): void
+    {
+        $this->components->twoColumnDetail('Founded years added', (string) $report['founded']);
+        $this->components->twoColumnDetail('Grounds given capacity or opened year', (string) $report['ground_details']);
+        $this->components->twoColumnDetail('Addresses added', (string) $report['addresses']);
+        $this->components->twoColumnDetail('Clubs not matched on Wikidata', (string) count($report['unmatched']));
     }
 }

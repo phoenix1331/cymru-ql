@@ -5,7 +5,7 @@
         "ground": "park-hall-oswestry",
         "colour": "#003DA5",
         "nickname": "The Saints",
-        "founded": null
+        "founded": 1959
     },
     {
         "slug": "connahs-quay-nomads",
@@ -21,7 +21,7 @@
         "ground": "the-oval-caernarfon",
         "colour": "#F1B434",
         "nickname": "The Canaries",
-        "founded": null
+        "founded": 1876
     },
     {
         "slug": "barry-town-united",
@@ -45,7 +45,7 @@
         "ground": "cyncoed-campus-cardiff",
         "colour": "#8C1C13",
         "nickname": "The Archers",
-        "founded": null
+        "founded": 1984
     },
     {
         "slug": "haverfordwest-county",
@@ -53,7 +53,7 @@
         "ground": "bridge-meadow-haverfordwest",
         "colour": "#003DA5",
         "nickname": "The Bluebirds",
-        "founded": null
+        "founded": 1899
     },
     {
         "slug": "llandudno",
@@ -69,7 +69,7 @@
         "ground": "the-airfield-broughton",
         "colour": "#003DA5",
         "nickname": "The Wingmakers",
-        "founded": null
+        "founded": 1946
     },
     {
         "slug": "colwyn-bay",
@@ -77,7 +77,7 @@
         "ground": "llanelian-road-colwyn-bay",
         "colour": "#003DA5",
         "nickname": "The Seagulls",
-        "founded": null
+        "founded": 1881
     },
     {
         "slug": "flint-town-united",
@@ -85,7 +85,7 @@
         "ground": "cae-y-castell-flint",
         "colour": "#C0C0C0",
         "nickname": "The Silkmen",
-        "founded": null
+        "founded": 1886
     },
     {
         "slug": "holywell-town",
@@ -93,7 +93,7 @@
         "ground": "halkyn-road-holywell",
         "colour": "#003DA5",
         "nickname": "The Wellmen",
-        "founded": null
+        "founded": 1881
     },
     {
         "slug": "ammanford",
@@ -101,7 +101,7 @@
         "ground": "the-recreation-ground-ammanford",
         "colour": "#000000",
         "nickname": "The Ammans",
-        "founded": null
+        "founded": 1992
     },
     {
         "slug": "briton-ferry-llansawel",
@@ -109,7 +109,7 @@
         "ground": "old-road-briton-ferry",
         "colour": "#000000",
         "nickname": "The Ferry",
-        "founded": null
+        "founded": 2009
     },
     {
         "slug": "cambrian-united",
@@ -125,7 +125,7 @@
         "ground": "ynys-park-port-talbot",
         "colour": "#D50032",
         "nickname": "Trefelin",
-        "founded": null
+        "founded": 1984
     },
     {
         "slug": "brickfield-rangers",
@@ -133,7 +133,7 @@
         "ground": "clywedog-park-wrexham",
         "colour": "#D50032",
         "nickname": "The Brickies",
-        "founded": null
+        "founded": 1976
     },
     {
         "slug": "bangor-1876",
@@ -149,7 +149,7 @@
         "ground": "maes-tegid-bala",
         "colour": "#003DA5",
         "nickname": "The Lakesiders",
-        "founded": null
+        "founded": 1884
     },
     {
         "slug": "newtown",
@@ -157,7 +157,7 @@
         "ground": "latham-park-newtown",
         "colour": "#D50032",
         "nickname": "The Robins",
-        "founded": null
+        "founded": 1875
     },
     {
         "slug": "mold-alexandra",
@@ -165,7 +165,7 @@
         "ground": "alyn-park-mold",
         "colour": "#D50032",
         "nickname": "The Dragons",
-        "founded": null
+        "founded": 1929
     },
     {
         "slug": "porthmadog",
@@ -173,7 +173,7 @@
         "ground": "y-traeth-porthmadog",
         "colour": "#D50032",
         "nickname": "Port",
-        "founded": null
+        "founded": 1972
     },
     {
         "slug": "caersws",
@@ -181,7 +181,7 @@
         "ground": "the-recreation-ground-caersws",
         "colour": "#003DA5",
         "nickname": "The Bluebirds",
-        "founded": null
+        "founded": 1887
     },
     {
         "slug": "guilsfield",
@@ -189,7 +189,7 @@
         "ground": "community-centre-ground-guilsfield",
         "colour": "#00A650",
         "nickname": "The Guils",
-        "founded": null
+        "founded": 1957
     },
     {
         "slug": "denbigh-town",
@@ -197,7 +197,7 @@
         "ground": "central-park-denbigh",
         "colour": "#000000",
         "nickname": "The Cadets",
-        "founded": null
+        "founded": 1880
     },
     {
         "slug": "rhyl",
@@ -205,7 +205,7 @@
         "ground": "belle-vue-rhyl",
         "colour": "#FFFFFF",
         "nickname": "The Lilywhites",
-        "founded": null
+        "founded": 2020
     },
     {
         "slug": "buckley-town",
@@ -213,7 +213,7 @@
         "ground": "globe-way-buckley",
         "colour": "#00A650",
         "nickname": "The Bucks",
-        "founded": null
+        "founded": 1977
     },
     {
         "slug": "ruthin-town",
@@ -221,7 +221,7 @@
         "ground": "memorial-playing-fields-ruthin",
         "colour": "#003DA5",
         "nickname": "The Ruthinians",
-        "founded": null
+        "founded": 1951
     },
     {
         "slug": "holyhead-hotspur",
@@ -229,7 +229,7 @@
         "ground": "the-new-oval-holyhead",
         "colour": "#003DA5",
         "nickname": "The Bees",
-        "founded": null
+        "founded": 1990
     },
     {
         "slug": "llanuwchllyn",
@@ -245,7 +245,7 @@
         "ground": "cae-baker-penrhyn-coch",
         "colour": "#00A650",
         "nickname": "The Roosters",
-        "founded": null
+        "founded": 1965
     },
     {
         "slug": "gresford-athletic",
@@ -253,7 +253,7 @@
         "ground": "the-rock-gresford",
         "colour": "#003DA5",
         "nickname": "The Colliers",
-        "founded": null
+        "founded": 1946
     },
     {
         "slug": "pure-swansea",
@@ -269,7 +269,7 @@
         "ground": "usw-sport-park-pontypridd",
         "colour": "#8C1C13",
         "nickname": "The Dragons",
-        "founded": null
+        "founded": 1992
     },
     {
         "slug": "carmarthen-town",
@@ -277,7 +277,7 @@
         "ground": "richmond-park-carmarthen",
         "colour": "#F1B434",
         "nickname": "The Old Gold",
-        "founded": null
+        "founded": 1950
     },
     {
         "slug": "baglan-dragons",
@@ -293,7 +293,7 @@
         "ground": "park-avenue-aberystwyth",
         "colour": "#00A650",
         "nickname": "The Seasiders",
-        "founded": null
+        "founded": 1884
     },
     {
         "slug": "treowen-stars",
@@ -301,7 +301,7 @@
         "ground": "bush-park-newbridge",
         "colour": "#F1B434",
         "nickname": "The Stars",
-        "founded": null
+        "founded": 1926
     },
     {
         "slug": "ynyshir-albions",
@@ -317,7 +317,7 @@
         "ground": "newport-stadium-newport",
         "colour": "#F1B434",
         "nickname": "The Steelmen",
-        "founded": null
+        "founded": 1963
     },
     {
         "slug": "afan-lido",
@@ -325,7 +325,7 @@
         "ground": "marston-stadium-port-talbot",
         "colour": "#D50032",
         "nickname": "The Lido",
-        "founded": null
+        "founded": 1967
     },
     {
         "slug": "trethomas-bluebirds",
@@ -341,7 +341,7 @@
         "ground": "lydstep-park-cardiff",
         "colour": "#8C1C13",
         "nickname": "The Draconians",
-        "founded": null
+        "founded": 1963
     },
     {
         "slug": "caerau-ely",
@@ -365,7 +365,7 @@
         "ground": "parc-ynysderw-pontardawe",
         "colour": "#003DA5",
         "nickname": "Ponty",
-        "founded": null
+        "founded": 1947
     },
     {
         "slug": "llanelli-town",
@@ -381,6 +381,6 @@
         "ground": "windmill-lane-llantwit-major",
         "colour": "#003DA5",
         "nickname": "Windmill Army",
-        "founded": null
+        "founded": 1962
     }
 ]

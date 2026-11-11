@@ -39,6 +39,33 @@ final readonly class GroundData
     }
 
     /**
+     * Returns a copy with any empty details filled from the given values.
+     */
+    public function withMissingDetails(
+        ?int $capacity = null,
+        ?int $opened = null,
+        ?string $address = null,
+        ?string $description = null,
+    ): self {
+        return new self(
+            slug: $this->slug,
+            name: $this->name,
+            town: $this->town,
+            lat: $this->lat,
+            lng: $this->lng,
+            capacity: $this->capacity ?? $capacity,
+            opened: $this->opened ?? $opened,
+            address: $this->address ?? $address,
+            description: $this->description ?? $description,
+        );
+    }
+
+    public function fillMissingFrom(self $other): self
+    {
+        return $this->withMissingDetails($other->capacity, $other->opened, $other->address, $other->description);
+    }
+
+    /**
      * @return array{slug: string, name: string, town: string, lat: float, lng: float, capacity: ?int, opened: ?int, address: ?string, description: ?string}
      */
     public function toArray(): array

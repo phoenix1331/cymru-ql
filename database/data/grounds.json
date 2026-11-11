@@ -7,7 +7,7 @@
         "lng": -3.02637,
         "capacity": 3000,
         "opened": 1993,
-        "address": null,
+        "address": "Burma Road, Park Hall, SY11 4FR",
         "description": "Park Hall sits just outside Oswestry in Shropshire, making TNS the only Welsh league club playing its home games in England. The club moved in permanently in 2007 and the ground has since been expanded and re-laid to meet UEFA criteria, though larger European ties are still taken to Shrewsbury Town."
     },
     {
@@ -18,7 +18,7 @@
         "lng": -3.12578,
         "capacity": 1000,
         "opened": 1998,
-        "address": null,
+        "address": "Marsh Lane, Flint, CH6 5PJ",
         "description": "Built at Coleg Cambria in Kelsterton in 1998, the Deeside Stadium has a single raised 500-seat stand and an athletics track. Persistent drainage problems and a tenancy dispute pushed the Nomads into a groundshare at Flint’s Cae-y-Castell from 2023-24; European home ties have been played at Park Avenue and Park Hall."
     },
     {
@@ -29,7 +29,7 @@
         "lng": -4.26744,
         "capacity": 3000,
         "opened": 1888,
-        "address": null,
+        "address": "Cae'r Ymryson, Caernarfon, LL55 2LR",
         "description": "The Oval has hosted football in Caernarfon since 1888 and holds 3,000 with around 1,200 seated, on a site between the town walls and the Menai Strait. A major renovation ran through 2025-26, with the club temporarily at Maesdu Park, before the ground staged 2026 UEFA European Under-19 Championship matches."
     },
     {
@@ -40,7 +40,7 @@
         "lng": -3.2655,
         "capacity": 3500,
         "opened": 1913,
-        "address": null,
+        "address": "Gladstone Road, Barry, CF63 1NH",
         "description": "Jenner Park was built on land given by the Jenner family and opened for the 1913-14 season. The council rebuilt it in the 1980s with a running track and all-seater stand, and a 3G surface was installed in 2015."
     },
     {
@@ -51,7 +51,7 @@
         "lng": -3.60898,
         "capacity": 1200,
         "opened": 2014,
-        "address": null,
+        "address": "Llangewydd Road, Bryntirion, CF31 4XA",
         "description": "Bryntirion Park was re-laid with an artificial surface to coincide with Penybont’s formation, officially opened in January 2014 by Malky Mackay before a Cardiff City Development XI. It has carried a run of sponsor names: SDM Glass Stadium, Kymco Stadium and most recently the DragonBet Stadium."
     },
     {
@@ -62,7 +62,7 @@
         "lng": -3.15975,
         "capacity": 1620,
         "opened": 2011,
-        "address": null,
+        "address": "Circle Way West, Cardiff, CF23 6UR",
         "description": "The 3G pitch sits inside the university’s Cyncoed sports campus, overlooked along one side by the National Indoor Athletics Centre. A small stand opposite holds just under 300 seats, with open standing behind both goals."
     },
     {
@@ -73,7 +73,7 @@
         "lng": -4.96752,
         "capacity": 2100,
         "opened": 1998,
-        "address": null,
+        "address": "Well Lane, Haverfordwest, SA61 2PL",
         "description": "Bridge Meadow, currently sponsored as the Ogi Bridge Meadow Stadium, holds around 2,100 beside the Western Cleddau. The move here followed the ground deal that took the club out of the League of Wales in 1994, three years before they returned."
     },
     {
@@ -84,7 +84,7 @@
         "lng": -3.82963,
         "capacity": 1013,
         "opened": 1991,
-        "address": null,
+        "address": "Builder Street West, Llandudno, LL30 1HH",
         "description": "Maesdu Park opened in 1991 with floodlights following in 1994, and now holds a shade over 1,000. A £420,000 3G pitch was laid in 2014 and new grandstands brought it up to top-tier criteria; Caernarfon Town used it while The Oval was rebuilt."
     },
     {
@@ -95,7 +95,7 @@
         "lng": -2.982,
         "capacity": 1600,
         "opened": 1946,
-        "address": null,
+        "address": "Chester Road, Broughton, CH4 0TH",
         "description": "The Airfield, currently the Hollingsworth Group Stadium, holds 1,600 with 500 seated, on the edge of the Broughton wing factory site. Its floodlights retract because of the live runway alongside, and the grass pitch was replaced with 3G in 2014."
     },
     {
@@ -106,7 +106,7 @@
         "lng": -3.69969,
         "capacity": 2500,
         "opened": 1984,
-        "address": null,
+        "address": "Ffordd Llaneilian, Old Colwyn, LL29 8UN",
         "description": "The club moved to Llanelian Road in Old Colwyn in 1984, adding floodlights in 1990 that were switched on for a friendly against Liverpool. A new 1,000-seat stand was completed in 2023, and the ground currently carries the Blue Turtle Arena sponsor name."
     },
     {
@@ -128,7 +128,7 @@
         "lng": -3.21418,
         "capacity": 2000,
         "opened": 1946,
-        "address": null,
+        "address": "Drop off, Holywell, CH8 7TZ",
         "description": "Halkyn Road, sponsored as the Bartons North Wales Stadium, sits below the community hospital a short walk from the town centre. Capacity is 2,000, of which 500 is seated and a further 250 covered."
     },
     {
@@ -139,7 +139,7 @@
         "lng": -3.99558,
         "capacity": 1000,
         "opened": 2006,
-        "address": null,
+        "address": "Heol Pen-y-Banc, Ammanford, SA18 3HB",
         "description": "The club left Rice Road for the Recreation Ground on Manor Road, where the first fixture was played in 2006. Floodlights and a 250-seat stand were added in 2018 as the ground was brought up to national-tier standard."
     },
     {
@@ -150,7 +150,7 @@
         "lng": -3.81368,
         "capacity": 2000,
         "opened": 1935,
-        "address": null,
+        "address": "Old Road, Briton Ferry, SA11 2EU",
         "description": "Old Road has been home to football in Briton Ferry for decades and is shared with the club’s ladies side. Its record crowd of 1,384 came against Barry Town United on 31 December 2024."
     },
     {
@@ -161,7 +161,7 @@
         "lng": -3.46812,
         "capacity": 1000,
         "opened": 1976,
-        "address": null,
+        "address": "Railway Terrace, Tonypandy, CF40 2XX",
         "description": "The King George V New Field sits high in Clydach Vale above the Rhondda and now carries an artificial surface, sponsored as the M&P 3G Stadium. Capacity is around 1,000, almost all of it standing."
     },
     {
@@ -172,7 +172,7 @@
         "lng": -3.79,
         "capacity": 1500,
         "opened": 1935,
-        "address": null,
+        "address": "Llewellyn Street, Aberavon, SA12 8SF",
         "description": "Ynys Park in Velindre is the home of the Trefelin Boys & Girls Club side and holds around 1,500. The club rose through the South Wales leagues to reach the national pyramid in 2018."
     },
     {
@@ -183,7 +183,7 @@
         "lng": -3.01288,
         "capacity": 1000,
         "opened": 1960,
-        "address": null,
+        "address": "Homestead Lane, Wrexham, LL14 4HE",
         "description": "Founded in 1976, Brickfield Rangers play at Clywedog Park on the southern edge of Wrexham, an all-standing ground holding about 1,000. (Note: \"The Rock\" is Gresford Athletic’s ground, not Brickfield’s.)"
     },
     {
@@ -194,7 +194,7 @@
         "lng": -4.15012,
         "capacity": 3000,
         "opened": 2012,
-        "address": null,
+        "address": "Ffordd Caergybi, Bangor, LL57 2HU",
         "description": "Formed by supporters in 2019 after the collapse of Bangor City, the club began at Bangor University’s Treborth ground before taking over Nantporth. The stadium, opened in 2012 on the shore of the Menai Strait, holds 3,000 with 1,100 seated."
     },
     {
@@ -205,7 +205,7 @@
         "lng": -3.60153,
         "capacity": 3000,
         "opened": 1950,
-        "address": null,
+        "address": "Castle Street, Y Bala, LL23 7UY",
         "description": "Bala Town have played at Maes Tegid, a short walk from Llyn Tegid, since the early 1950s. The ground holds 3,000 but falls short of UEFA criteria, so European ties have been staged at Rhyl’s Belle Vue."
     },
     {
@@ -216,7 +216,7 @@
         "lng": -3.32275,
         "capacity": 5000,
         "opened": 1950,
-        "address": null,
+        "address": "Park Lane, Newtown, SY16 1DE",
         "description": "Latham Park holds 5,000 with 1,300 seated, one of the larger grounds in the Welsh pyramid. It hosted the 2015 Welsh Cup final in front of a capacity crowd."
     },
     {
@@ -227,7 +227,7 @@
         "lng": -3.14387,
         "capacity": 3000,
         "opened": 1929,
-        "address": null,
+        "address": "Tai Maes, Mold, CH7 1RW",
         "description": "Mold Alexandra have played at Alyn Park since the club was founded in 1929, making it one of the longest unbroken club-ground associations in North Wales. Capacity is listed at 3,000."
     },
     {
@@ -238,7 +238,7 @@
         "lng": -4.12042,
         "capacity": 3000,
         "opened": 1893,
-        "address": null,
+        "address": "A487, Porthmadog, LL49 9PP",
         "description": "Y Traeth, \"the beach\", lies on reclaimed land behind the Cob, holding 3,000 with 800 seated. The club dates from 1884 and is among the oldest in Wales."
     },
     {
@@ -249,7 +249,7 @@
         "lng": -3.42927,
         "capacity": 4000,
         "opened": null,
-        "address": null,
+        "address": "A470, Caersŵs, SY17 5DX",
         "description": "The Recreation Ground sits beside the River Severn in a village of barely 1,500 people, yet is rated for 4,000 with 500 seated. Caersws took their present name in 1974 and were founder members of the League of Wales."
     },
     {
@@ -260,7 +260,7 @@
         "lng": -3.159,
         "capacity": 1100,
         "opened": 1966,
-        "address": null,
+        "address": "Clos Mytton, Guilsfield, SY21 9PF",
         "description": "The Guils play at the village Community Centre ground off Clay Lane, just north of Welshpool, with a capacity of around 1,100. The current club dates from 1957, though a Guilsfield side existed as early as 1879."
     },
     {
@@ -271,7 +271,7 @@
         "lng": -3.41025,
         "capacity": 1200,
         "opened": 1930,
-        "address": null,
+        "address": "St David's Lane, Denbigh, LL16 3EP",
         "description": "Founded in 1876, Denbigh Town play at Central Park, capacity around 1,200. Work began in summer 2024 on a multi-million-pound clubhouse and changing block after the old facilities were demolished."
     },
     {
@@ -281,8 +281,8 @@
         "lat": 53.31892,
         "lng": -3.47608,
         "capacity": 3800,
-        "opened": null,
-        "address": null,
+        "opened": 1892,
+        "address": "Grange Road, Rhyl, LL18 4BY",
         "description": "CPD Y Rhyl 1879 is the phoenix club formed in 2020 after Rhyl FC folded, and it bought Belle Vue outright in October 2024. The ground holds around 3,800 with 1,720 seated and has staged European ties for other Welsh clubs."
     },
     {
@@ -293,7 +293,7 @@
         "lng": -3.06846,
         "capacity": 1700,
         "opened": 1999,
-        "address": null,
+        "address": "Globe Way, Burntwood, CH7 3LY",
         "description": "Globe Way was built on reclaimed land beside Etna Country Park and opened in 1999, holding 1,700 with 370 seated. Floodlights followed in 2004, along with covered stands and a clubhouse."
     },
     {
@@ -304,7 +304,7 @@
         "lng": -3.31557,
         "capacity": 2000,
         "opened": 1949,
-        "address": null,
+        "address": "Cae Seren, Ruthin, LL15 1NB",
         "description": "The Memorial Playing Fields hold around 2,000 in the Vale of Clwyd. Floodlights and refurbished player facilities were inaugurated for a game against Guilsfield in August 2021."
     },
     {
@@ -315,7 +315,7 @@
         "lng": -4.63223,
         "capacity": 2000,
         "opened": 2007,
-        "address": null,
+        "address": "Ffordd y Felin, Holyhead, LL65 2YD",
         "description": "The New Oval opened on 27 July 2007 with a friendly against a Wolverhampton Wanderers XI, and stands opposite the town leisure centre. The original Oval survives alongside it for local football."
     },
     {
@@ -326,7 +326,7 @@
         "lng": -3.66912,
         "capacity": 1000,
         "opened": null,
-        "address": null,
+        "address": "B4403, Llanuwchllyn, LL23 7NA",
         "description": "Cae Llan serves a village of a few hundred people at the head of Llyn Tegid. The club, formed in 1957, built a 100-seat stand in 2020 and laid a new playing surface before the 2023-24 season."
     },
     {
@@ -337,7 +337,7 @@
         "lng": -3.99556,
         "capacity": 950,
         "opened": 1965,
-        "address": null,
+        "address": "Glanceulan, Penrhyn-coch, SY23 3HF",
         "description": "Penrhyncoch have played at Cae Baker since their formation in 1965, a compact ground in the hills above Aberystwyth. It holds about 950, with 250 seated and 700 standing."
     },
     {
@@ -348,7 +348,7 @@
         "lng": -2.97527,
         "capacity": 3000,
         "opened": null,
-        "address": null,
+        "address": "Lakeside Close, Pandy, LL12 8PG",
         "description": "The Rock, on Clappers Lane, has been Gresford’s home since the club was founded in 1946 in a village defined by the 1934 colliery disaster. Tier-2 ground criteria forced a temporary groundshare at Airbus’s Broughton stadium from 2024."
     },
     {
@@ -359,7 +359,7 @@
         "lng": -3.98756,
         "capacity": 1000,
         "opened": null,
-        "address": null,
+        "address": "Sketty Lane, Swansea, SA2 8QA",
         "description": "Formerly Swansea University FC and reformed in 2011, the club plays at the Swansea Bay Sports Park on Sketty Lane, close to Singleton Park. It won the Cymru South title in 2019-20."
     },
     {
@@ -370,7 +370,7 @@
         "lng": -3.2846,
         "capacity": 1000,
         "opened": 2015,
-        "address": null,
+        "address": "Heol-y-Bwnsi, Pontypridd, CF37 5UP",
         "description": "The club moved to the University of South Wales Sport Park on Treforest Industrial Estate to meet the FAW’s Tier 2 ground criteria introduced for 2018-19. The 3G pitch is shared with the university’s own sides."
     },
     {
@@ -381,7 +381,7 @@
         "lng": -4.30224,
         "capacity": 3000,
         "opened": 1952,
-        "address": null,
+        "address": "Richmond Terrace, Carmarthen, SA31 1HE",
         "description": "Richmond Park has been redeveloped into a compact modern ground with the 1,000-seat Clay Shaw Butler Stand, and currently carries the LHP Stadium sponsor name. It staged the club’s first home European tie against SK Brann in July 2007."
     },
     {
@@ -392,7 +392,7 @@
         "lng": -3.81063,
         "capacity": 1000,
         "opened": null,
-        "address": null,
+        "address": "A48, Baglan, SA12 8TR",
         "description": "The Evans Bevan Playing Fields in Baglan hold about 1,000 and are shared with the club’s reserve and ladies sides. The club has run through several names, from Red Dragon & Baglan to Baglan Red Dragons and now Baglan Dragons."
     },
     {
@@ -403,7 +403,7 @@
         "lng": -4.08097,
         "capacity": 5000,
         "opened": 1934,
-        "address": null,
+        "address": "Park Avenue, Aberystwyth, SY23 1PF",
         "description": "Park Avenue holds 5,000 with 1,000 seated and is one of the few Welsh grounds licensed for UEFA competition, so it regularly hosts other clubs’ European ties. The club, formed in 1884 and also known as the Black and Greens, are founder members of the League of Wales."
     },
     {
@@ -414,7 +414,7 @@
         "lng": -3.15038,
         "capacity": 950,
         "opened": 1973,
-        "address": null,
+        "address": "Uplands, Newbridge, NP11 4RG",
         "description": "Bush Park sits above Newbridge in the Ebbw valley; changing rooms were built below the pitch in 1973 from the proceeds of a club tote. The ground holds around 950 and received a £29,000 facilities grant in recent years."
     },
     {
@@ -425,7 +425,7 @@
         "lng": -3.40912,
         "capacity": 2000,
         "opened": null,
-        "address": null,
+        "address": "Church Terrace, Ynyshir, CF39 0ET",
         "description": "The Oval in Ynyshir is shared with AFC Wattstown and holds around 2,000, mostly on grass banking. The club reached the Welsh League in 2019 after decades in the South Wales leagues."
     },
     {
@@ -436,7 +436,7 @@
         "lng": -2.95936,
         "capacity": 5058,
         "opened": 1993,
-        "address": null,
+        "address": "Velodrome Way, Newport, NP19 4TG",
         "description": "Newport Stadium at Spytty Park holds 5,058 with 3,246 seated and has an athletics track. The club moved in during 2003, at the time sharing with Newport County."
     },
     {
@@ -447,7 +447,7 @@
         "lng": -3.80917,
         "capacity": 4200,
         "opened": null,
-        "address": null,
+        "address": "Moorland Road, Sandfields East, SA12 6JH",
         "description": "The Marston Stadium in Aberavon holds 4,200 with 701 seated, a large ground for the level. The club was formed in 1967 around the Afan Lido sports centre that gives it its name."
     },
     {
@@ -458,7 +458,7 @@
         "lng": -3.23738,
         "capacity": 1500,
         "opened": null,
-        "address": null,
+        "address": "Caerphilly Road, Ystrad Mynach, CF82 7EP",
         "description": "The club dates from 1903, its original pitch bought by miners from the Bedwas and Trethomas colliery and coke works. National-tier ground criteria moved home games to the Caerphilly CBC Centre for Sporting Excellence at Ystrad Mynach; the coordinates here still point at Trethomas."
     },
     {
@@ -469,7 +469,7 @@
         "lng": -3.21451,
         "capacity": 1000,
         "opened": 1984,
-        "address": null,
+        "address": "Lydstep Crescent, Cardiff, CF14 2QX",
         "description": "Lydstep Park, off Llanidloes Road in Gabalfa, has been the club’s home since the 1984-85 season, when they were briefly known as Gabalfa Draconians. The club was founded in 1963 and reached Cymru South via the Ardal leagues."
     },
     {
@@ -480,7 +480,7 @@
         "lng": -3.2474,
         "capacity": 1000,
         "opened": null,
-        "address": null,
+        "address": "Cwrt-Yr-Ala Road, Cardiff, CF5 5QD",
         "description": "Founded in 1955, the club played on Ely Racecourse and then at Glyn Derw School before settling at Cwrt-yr-Ala in western Cardiff. The ground holds about 1,000."
     },
     {
@@ -491,7 +491,7 @@
         "lng": -3.85695,
         "capacity": 1000,
         "opened": 2015,
-        "address": null,
+        "address": "Swansea Road, Pontardawe, SA8 4BL",
         "description": "The club, formed in 1947, relocated to Parc Ynysderw in 2015 and has the ground to itself. Committee-led investment has since brought it up to Tier 2 standard."
     },
     {
@@ -502,7 +502,7 @@
         "lng": -4.14768,
         "capacity": 3700,
         "opened": 1922,
-        "address": null,
+        "address": "Penallt Road, Llanelli, SA15 1HL",
         "description": "Llanelli have played at Stebonheath Park since the 1922-23 season; it holds 3,700 and is council-owned. A 300-seat stand was added in 2008 to meet European competition standards during the club’s Welsh Premier years."
     },
     {
@@ -513,7 +513,7 @@
         "lng": -3.47932,
         "capacity": 500,
         "opened": null,
-        "address": null,
+        "address": "Maes Illtuds, Llantwit Major, CF61 2SD",
         "description": "The ground off Windmill Lane, also listed as Frampton Lane, holds around 500 and is the smallest in the division. Formed in 1962, the club played FENIX Trophy fixtures here in 2024-25."
     }
 ]

@@ -2,11 +2,17 @@
 
 declare(strict_types=1);
 
+use App\Data\ClubData;
 use App\Data\ClubSeasonData;
 use App\Data\DataFiles;
+use App\Data\GroundData;
+use App\Import\Enrichment\NominatimClient;
+use App\Import\Enrichment\WikidataClient;
 use App\Import\OttConfigReader;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Process;
+use Illuminate\Support\Sleep;
 
 beforeEach(function () {
     $this->directory = sys_get_temp_dir().'/cymruql-import-'.uniqid();
@@ -106,3 +112,51 @@ it('rejects output that is not a list of clubs', function () {
 
     (new OttConfigReader)->read(base_path('tests/Fixtures/ott-cymru.js'));
 })->throws(RuntimeException::class, 'did not produce a list of clubs');
+
+it('enriches clubs and grounds when asked', function () {
+    Sleep::fake();
+    Http::fake([
+        WikidataClient::ENDPOINT => Http::response(['results' => ['bindings' => [
+            binding(['label' => 'Caernarfon Town F.C.', 'club' => 'Q1', 'inception' => '1876-01-01T00:00:00Z', 'coord' => 'Point(-4.2675 53.134722)']),
+        ]]]),
+        NominatimClient::ENDPOINT.'*' => Http::response(['address' => ['road' => 'Marcus Street', 'town' => 'Caernarfon']]),
+    ]);
+
+    $this->artisan('cymru:import', ['--source' => base_path('tests/Fixtures/ott-cymru.js'), '--enrich' => true])
+        ->expectsOutputToContain('Enriching from Wikidata')
+        ->assertSuccessful();
+
+    $files = app(DataFiles::class);
+
+    expect(collect($files->clubs())->firstWhere('slug', 'caernarfon-town')->founded)->toBe(1876)
+        ->and(collect($files->grounds())->firstWhere('slug', 'the-oval-caernarfon')->address)->toBe('Marcus Street, Caernarfon');
+});
+
+it('keeps enriched details when re-importing without enrich', function () {
+    $files = app(DataFiles::class);
+    $files->writeRows(DataFiles::CLUBS, [new ClubData('caernarfon-town', 'Caernarfon Town', 'the-oval-caernarfon', '#F1B434', founded: 1876)]);
+    $files->writeRows(DataFiles::GROUNDS, [new GroundData('the-oval-caernarfon', 'The Oval', 'Caernarfon', 53.1, -4.2, address: 'Marcus Street, Caernarfon')]);
+
+    $this->artisan('cymru:import', ['--source' => base_path('tests/Fixtures/ott-cymru.js')])->assertSuccessful();
+
+    expect(collect($files->clubs())->firstWhere('slug', 'caernarfon-town')->founded)->toBe(1876)
+        ->and(collect($files->grounds())->firstWhere('slug', 'the-oval-caernarfon')->address)->toBe('Marcus Street, Caernarfon')
+        ->and(collect($files->grounds())->firstWhere('slug', 'the-oval-ynyshir')->address)->toBeNull();
+});
+
+it('fails cleanly when wikidata is unavailable', function () {
+    Http::fake([WikidataClient::ENDPOINT => Http::response('busy', 503)]);
+
+    $this->artisan('cymru:import', ['--source' => base_path('tests/Fixtures/ott-cymru.js'), '--enrich' => true])
+        ->assertFailed();
+
+    expect(app(DataFiles::class)->exists(DataFiles::CLUBS))->toBeFalse();
+});
+
+it('applies hand-maintained overrides last', function () {
+    app(DataFiles::class)->write(DataFiles::OVERRIDES, ['clubs' => ['caernarfon-town' => ['founded' => 1876]]]);
+
+    $this->artisan('cymru:import', ['--source' => base_path('tests/Fixtures/ott-cymru.js')])->assertSuccessful();
+
+    expect(collect(app(DataFiles::class)->clubs())->firstWhere('slug', 'caernarfon-town')->founded)->toBe(1876);
+});
