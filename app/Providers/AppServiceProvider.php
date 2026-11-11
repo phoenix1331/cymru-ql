@@ -8,6 +8,9 @@ use App\Data\DataFiles;
 use App\Import\Distances\OsrmClient;
 use App\Import\Enrichment\NominatimClient;
 use App\Import\Enrichment\WikidataClient;
+use App\Simulation\ClubRatings;
+use App\Simulation\MatchSimulator;
+use App\Simulation\SeasonGenerator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +28,17 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             WikidataClient::class,
             fn (): WikidataClient => new WikidataClient((string) config('cymru.http_user_agent')),
+        );
+
+        $this->app->bind(
+            SeasonGenerator::class,
+            fn (): SeasonGenerator => new SeasonGenerator(
+                new MatchSimulator,
+                new ClubRatings,
+                (int) config('cymru.simulation.seed'),
+                (string) config('cymru.simulation.kick_off_time'),
+                (string) config('cymru.simulation.kick_off_timezone'),
+            ),
         );
 
         $this->app->bind(

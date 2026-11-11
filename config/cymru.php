@@ -25,6 +25,18 @@ return [
     | User agent sent to Wikidata and Nominatim by `cymru:import --enrich`.
     | Both services ask for an identifying user agent; set your own here.
     */
+    'simulation' => [
+        // Fixed seed so every install simulates the same results.
+        'seed' => (int) env('CYMRU_SIMULATION_SEED', 1331),
+
+        // Fixtures kicking off before this moment are simulated as finished.
+        // Null means now. `php artisan cymru:reset --as-of=` overrides it.
+        'as_of' => env('CYMRU_SIMULATE_AS_OF'),
+
+        'kick_off_time' => '14:30',
+        'kick_off_timezone' => 'Europe/London',
+    ],
+
     'http_user_agent' => env('CYMRU_HTTP_USER_AGENT', 'laravel-data-import/1.0'),
 
 ];

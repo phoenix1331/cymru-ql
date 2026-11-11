@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ClubSeeder::class,
             ClubSeasonSeeder::class,
             DistanceSeeder::class,
+            FixtureSeeder::class,
         ]);
     }
 }
