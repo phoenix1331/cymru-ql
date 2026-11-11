@@ -23,6 +23,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Import | `app/Console/Commands/CymruImport.php`, `app/Import/` | `cymru:import` evaluates the Over the Terraces `cymru.js` module with Node (`OttConfigReader`) and maps rows to clubs and grounds (`ClubImporter`). Source path: `--source` or `OTT_CYMRU_PATH`. `--enrich` fills gaps via `app/Import/Enrichment/` (Wikidata SPARQL, Nominatim reverse geocoding at 1 req/s); `overrides.json` applied last |
 | Distance matrix | `database/data/distances.json` | Ground x ground (47 x 47: 48 clubs, one shared ground) road km plus straight-line km, built by `cymru:import --distances` (`app/Import/Distances/`, one OSRM table request). Read via `DataFiles::distances()` (`DistanceMatrixData`). No OSRM calls at runtime |
 | Models | `app/Models/` | `League`, `Season`, `Ground`, `Club`, `ClubSeason` (club in a league for a season, final position), `Distance` (directed ground pair, road and straight-line km), `Fixture` (status enum, venue, live minute), `MatchEvent` (type enum, score after the event). Route keys are slugs |
+| Seeders | `database/seeders/` | One per JSON file, idempotent `upsert` keyed on slugs; `SlugLookup` resolves slugs to ids and fails on unknown references. `migrate --seed` loads everything in about 2 s |
 | Domain services | `app/Services/` | Shared by REST and GraphQL so the comparison is fair |
 | REST | `routes/api.php`, API Resources | |
 | GraphQL | `graphql/schema.graphql` (Lighthouse) | Schema first, batch loading toggle, complexity and depth limits |
