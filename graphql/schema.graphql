@@ -25,6 +25,20 @@ type Query {
 
     "Every ground, alphabetically."
     grounds: [Ground!]! @paginate @orderBy(column: "name")
+
+    "A league in one season (current by default), with its clubs and table."
+    league(slug: String!, season: String): LeagueSeason! @field(resolver: "App\\GraphQL\\Queries\\LeagueQuery")
+
+    "A league table. Seasons without results list the recorded final positions with null stats."
+    table(league: String!, season: String): [TableRow!]! @field(resolver: "App\\GraphQL\\Queries\\TableQuery")
+
+    "The closest grounds to a ground by road, optionally only those used by one league's clubs."
+    nearbyGrounds(
+        ground: String!
+        limit: Int! = 5 @rules(apply: ["integer", "between:1,50"])
+        league: String
+        season: String
+    ): [Distance!]! @field(resolver: "App\\GraphQL\\Queries\\NearbyGroundsQuery")
 }
 
 "A football season, August to May."
@@ -57,6 +71,10 @@ type Ground {
     description: String
     "Clubs that play their home games here."
     clubs: [Club!]! @hasMany
+    "The closest other grounds by road."
+    nearby(limit: Int! = 5 @rules(apply: ["integer", "between:1,50"])): [Distance!]! @field(resolver: "App\\GraphQL\\Queries\\NearbyGroundsQuery")
+    "Distances to every ground in a league, nearest first."
+    distancesInLeague(league: String!, season: String): [Distance!]! @field(resolver: "App\\GraphQL\\Queries\\LeagueDistancesQuery@fromGround")
 }
 
 "A football club."
@@ -70,6 +88,10 @@ type Club {
     ground: Ground! @belongsTo
     "League membership by season."
     seasons: [ClubSeason!]! @hasMany(relation: "clubSeasons")
+    "The league the club plays in for a season (current by default)."
+    league(season: String): LeagueSeason @field(resolver: "App\\GraphQL\\Queries\\ClubLeagueQuery")
+    "Road distance to every other ground in the club's league for a season: its away trips."
+    awayTrips(season: String): [Distance!]! @field(resolver: "App\\GraphQL\\Queries\\LeagueDistancesQuery@awayTrips")
 }
 
 "A club's league for one season, with its final position once the season is over."
@@ -78,4 +100,38 @@ type ClubSeason {
     season: Season! @belongsTo
     league: League! @belongsTo
     position: Int
+}
+
+"A league in one season."
+type LeagueSeason {
+    league: League!
+    season: Season!
+    "Clubs in the league that season, alphabetically."
+    clubs: [Club!]! @method
+    "The league table for that season."
+    table: [TableRow!]! @method
+}
+
+"One line of a league table. Stats are null when only the final position is recorded."
+type TableRow {
+    position: Int!
+    club: Club!
+    played: Int
+    won: Int
+    drawn: Int
+    lost: Int
+    goalsFor: Int
+    goalsAgainst: Int
+    goalDifference: Int @method
+    points: Int
+    "Last five results, oldest first: W, D or L."
+    form: [String!]
+}
+
+"Distance from one ground to another. Road distance can differ slightly by direction."
+type Distance {
+    from: Ground! @belongsTo(relation: "fromGround")
+    to: Ground! @belongsTo(relation: "toGround")
+    roadKm: Float! @rename(attribute: "road_km")
+    straightKm: Float! @rename(attribute: "straight_km")
 }

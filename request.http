@@ -155,3 +155,38 @@ Accept: application/json
 {
   "query": "{ clubs(first: 48) { data { name ground { name town } } paginatorInfo { total } } }"
 }
+
+###
+
+# The showcase query: a club with its ground, its league table and the road
+# distance to every other ground in its league, in one request.
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "query ($slug: String!) { club(slug: $slug) { name ground { name } league { league { name } season { name } table { position club { name } played points goalDifference form } } awayTrips { roadKm straightKm to { name town clubs { name } } } } }",
+  "variables": { "slug": "caernarfon-town" }
+}
+
+###
+
+# A league table on its own; past seasons list final positions.
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "{ table(league: \"cymru-north\", season: \"2025-26\") { position club { name } points } }"
+}
+
+###
+
+# Nearest grounds by road.
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "{ nearbyGrounds(ground: \"park-hall-oswestry\", limit: 5) { roadKm straightKm to { name town } } }"
+}
