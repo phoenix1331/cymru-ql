@@ -15,8 +15,8 @@ Loading the Caernarfon Town page, on seeded local data:
 |---|---|---|
 | HTTP requests | 20 | 1 |
 | Data received | 20.9 kB | 8.0 kB |
-| Database queries | 52 | 21 |
-| Database queries, batch loading off | | 50 |
+| Database queries | 52 | 19 |
+| Database queries, batch loading off | | 49 |
 
 The screen is identical in both modes. Each API is used the way it is meant to be used: REST resources reference related resources by link, so the client follows those links (club, then its seasons, then its ground, table and away distances, then each away ground); GraphQL asks for the whole shape in one query. Both sides call the same Laravel service classes, so the difference is the API, not the code behind it.
 
