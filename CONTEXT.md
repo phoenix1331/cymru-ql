@@ -9,7 +9,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Framework | Laravel 13, PHP 8.4+ |
 | Database | MySQL 8, native (WSL, macOS, Linux). Database `cymruql`, created by `php artisan migrate` if missing |
 | Tests | Pest 5, in-memory SQLite (`phpunit.xml`), coverage via pcov, 90% minimum on `app/` |
-| Front end | Vite (React + TypeScript + Tailwind planned) |
+| Front end | React 19 + TypeScript + Tailwind 4 via Vite inside Laravel (`resources/js/`), React Router (`router.tsx`), ESLint + `tsc` (`npm run lint`, `npm run typecheck`). One Blade view (`resources/views/app.blade.php`) served by a catch-all web route that skips `/api`, `/graphql`, `/graphiql`, `/up` |
 | Containers | None. No Docker, no Makefile |
 | Git hooks | Husky (`.husky/`): `commit-msg` (lowercase conventional commits), `pre-commit` (Pint, Larastan, osv-scanner) |
 | Static analysis | Larastan, level 6 (`phpstan.neon`) |
@@ -55,11 +55,12 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Node evaluates the Over the Terraces config | The source is a JS module (comments, single quotes); importing it is more reliable than parsing it in PHP, and Node is already required |
 | Enrichment fills nulls only, plus an overrides file | Over the Terraces values were reconciled by hand and win; Wikidata has stale entries (old Rhyl F.C. not marked dissolved), so corrections live in a reviewable JSON file |
 | Tests block stray HTTP | `Http::preventStrayRequests()` in `tests/Pest.php`; external APIs are always faked |
+| Visual identity | Chalk/slate/pitch green palette; REST is estuary blue `#2F6690`, GraphQL is Welsh red `#C8102E` everywhere. Barlow Condensed (signage/scoreboard) for headings and numbers, Atkinson Hyperlegible for body, via Bunny Fonts. Tokens in `resources/css/app.css` `@theme` |
 | Generated placeholder crests | Avoid shipping third-party club badges |
 
 ## Commands
 
 **composer**: setup | dev | test | test:coverage | lint | analyse
-**npm**: run prepare (activate git hooks)
+**npm**: run prepare (activate git hooks) | run dev | run build | run lint | run typecheck
 **artisan**: migrate | db:seed | cymru:import [--enrich] [--distances] | cymru:reset [--as-of=]
 **pest**: ./vendor/bin/pest | ./vendor/bin/pest --coverage --min=90

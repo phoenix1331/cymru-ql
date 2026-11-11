@@ -28,3 +28,4 @@ Thumbs.db
 
 # planning files
 .claude/
+/.playwright-mcp
