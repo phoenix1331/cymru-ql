@@ -60,6 +60,22 @@ class Club extends Model
     }
 
     /**
+     * @return HasMany<Fixture, $this>
+     */
+    public function homeFixtures(): HasMany
+    {
+        return $this->hasMany(Fixture::class, 'home_club_id');
+    }
+
+    /**
+     * @return HasMany<Fixture, $this>
+     */
+    public function awayFixtures(): HasMany
+    {
+        return $this->hasMany(Fixture::class, 'away_club_id');
+    }
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
