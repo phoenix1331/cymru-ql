@@ -14,6 +14,7 @@ use App\Import\Distances\OsrmClient;
 use App\Import\Enrichment\NominatimClient;
 use App\Import\Enrichment\WikidataClient;
 use App\Simulation\ClubRatings;
+use App\Simulation\MatchPlanner;
 use App\Simulation\MatchSimulator;
 use App\Simulation\SeasonGenerator;
 use App\Support\QueryMetrics;
@@ -52,11 +53,15 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
+            MatchPlanner::class,
+            fn (): MatchPlanner => new MatchPlanner(new MatchSimulator, (int) config('cymru.simulation.seed')),
+        );
+
+        $this->app->bind(
             SeasonGenerator::class,
             fn (): SeasonGenerator => new SeasonGenerator(
-                new MatchSimulator,
+                $this->app->make(MatchPlanner::class),
                 new ClubRatings,
-                (int) config('cymru.simulation.seed'),
                 (string) config('cymru.simulation.kick_off_time'),
                 (string) config('cymru.simulation.kick_off_timezone'),
             ),

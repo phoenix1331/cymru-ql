@@ -10,7 +10,7 @@ use Nuwave\Lighthouse\Execution\Utils\Subscription;
 /**
  * Publishes live fixture changes to GraphQL subscribers.
  */
-final class MatchFeed
+class MatchFeed
 {
     public function publish(Fixture $fixture): void
     {

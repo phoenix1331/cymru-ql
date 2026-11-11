@@ -23,9 +23,8 @@ final readonly class SeasonGenerator
     public const int MATCH_LENGTH_MINUTES = 110;
 
     public function __construct(
-        private MatchSimulator $simulator,
+        private MatchPlanner $planner,
         private ClubRatings $ratings,
-        private int $seed,
         private string $kickOffTime = '14:30',
         private string $timezone = 'Europe/London',
     ) {}
@@ -103,23 +102,13 @@ final readonly class SeasonGenerator
             return;
         }
 
-        $events = $this->simulator->play(
-            $ratings[$home->id] ?? ClubRatings::NEW_CLUB,
-            $ratings[$away->id] ?? ClubRatings::NEW_CLUB,
-            crc32("{$this->seed}|{$season->slug}|{$home->slug}|{$away->slug}"),
-        );
-
+        $events = $this->planner->plan($season, $home, $away, $ratings);
         $final = $events[array_key_last($events)];
         $now = now();
 
         MatchEvent::query()->insert(array_map(fn (SimulatedEvent $event): array => [
+            ...MatchPlanner::row($event, $home, $away),
             'fixture_id' => $fixture->id,
-            'club_id' => $event->forHome === null ? null : ($event->forHome ? $home->id : $away->id),
-            'type' => $event->type->value,
-            'minute' => $event->minute,
-            'home_score' => $event->homeScore,
-            'away_score' => $event->awayScore,
-            'description' => $this->describe($event, $event->forHome ? $home : $away),
             'created_at' => $now,
             'updated_at' => $now,
         ], $events));
@@ -130,19 +119,5 @@ final readonly class SeasonGenerator
             'away_score' => $final->awayScore,
             'minute' => 90,
         ]);
-    }
-
-    private function describe(SimulatedEvent $event, Club $club): string
-    {
-        return match ($event->type->value) {
-            'kick_off' => 'Kick off',
-            'half_time' => "Half time, {$event->homeScore}-{$event->awayScore}",
-            'full_time' => "Full time, {$event->homeScore}-{$event->awayScore}",
-            'goal' => "Goal for {$club->name}",
-            'penalty_goal' => "Penalty scored for {$club->name}",
-            'own_goal' => "Own goal, credited to {$club->name}",
-            'yellow_card' => "Yellow card for {$club->name}",
-            default => "Red card for {$club->name}",
-        };
     }
 }
