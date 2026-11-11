@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Api\ClubController;
+use App\Http\Controllers\Api\DistanceController;
 use App\Http\Controllers\Api\GroundController;
 use App\Http\Controllers\Api\LeagueController;
 use App\Http\Controllers\Api\SeasonController;
@@ -21,4 +22,7 @@ Route::name('api.')->group(function () {
 
     Route::get('grounds', [GroundController::class, 'index'])->name('grounds.index');
     Route::get('grounds/{ground}', [GroundController::class, 'show'])->name('grounds.show');
+    Route::get('grounds/{ground}/nearby', [DistanceController::class, 'nearby'])->name('grounds.nearby');
+    Route::get('grounds/{ground}/distances', [DistanceController::class, 'inLeague'])->name('grounds.distances');
+    Route::get('grounds/{from}/distances/{to}', [DistanceController::class, 'between'])->name('grounds.distances.show');
 });

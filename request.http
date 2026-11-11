@@ -77,3 +77,28 @@ Accept: application/json
 # Past season table from recorded final positions (meta.basis = final_positions).
 GET {{baseUrl}}/api/leagues/cymru-south/table?season=2025-26
 Accept: application/json
+
+### Distances
+
+# The five nearest grounds to The Oval by road.
+GET {{baseUrl}}/api/grounds/the-oval-caernarfon/nearby
+Accept: application/json
+
+###
+
+# The nearest grounds used by Cymru Premier clubs this season.
+GET {{baseUrl}}/api/grounds/park-hall-oswestry/nearby?league=cymru-premier&limit=3
+Accept: application/json
+
+###
+
+# Every ground in a league, nearest first, with the total road distance:
+# a club's away trips for the season.
+GET {{baseUrl}}/api/grounds/the-oval-caernarfon/distances?league=cymru-premier
+Accept: application/json
+
+###
+
+# One directed pair. Road distances can differ slightly by direction.
+GET {{baseUrl}}/api/grounds/the-new-oval-holyhead/distances/newport-stadium-newport
+Accept: application/json

@@ -36,7 +36,7 @@ final class GroundResource extends JsonResource
             ])->all()),
             'links' => [
                 'self' => route('api.grounds.show', $this->slug),
-                'nearby' => url("/api/grounds/{$this->slug}/nearby"),
+                'nearby' => route('api.grounds.nearby', $this->slug),
             ],
         ];
     }
