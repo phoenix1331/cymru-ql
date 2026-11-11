@@ -8,7 +8,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 |---|---|
 | Framework | Laravel 13, PHP 8.4+ |
 | Database | MySQL 8, native (WSL, macOS, Linux). Database `cymruql`, created by `php artisan migrate` if missing |
-| Tests | Pest 5, in-memory SQLite (`phpunit.xml`), coverage via pcov, 90% minimum on `app/` |
+| Tests | Pest 5, in-memory SQLite (`phpunit.xml`), coverage via pcov, 90% minimum on `app/`. Playwright smoke tests in `e2e/` (`npm run test:e2e`, `playwright.config.ts`, starts `php artisan serve` unless one is running; needs the seeded MySQL database) |
 | Front end | React 19 + TypeScript + Tailwind 4 via Vite inside Laravel (`resources/js/`), React Router (`router.tsx`), ESLint + `tsc` (`npm run lint`, `npm run typecheck`). One Blade view (`resources/views/app.blade.php`) served by a catch-all web route that skips `/api`, `/graphql`, `/graphiql`, `/up` |
 | Containers | None. No Docker, no Makefile |
 | Git hooks | Husky (`.husky/`): `commit-msg` (lowercase conventional commits), `pre-commit` (Pint, Larastan, osv-scanner) |
@@ -64,6 +64,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | No client cache across screen loads (TanStack `staleTime: 0`, urql `network-only`) | Revisiting a screen would otherwise show zero requests; every load is a real round trip so the scoreboard is honest |
 | Screens: one view model, two data hooks (`resources/js/screens/<screen>/`) | `useXRest` and `useXGraphQL` both return `ScreenData<View>`; one view component renders either, so the screen is identical and only the cost differs. REST follows links the normal way (club page: 20 requests including one per away ground; GraphQL: 1) |
 | Batch loading switch in the panel (`BatchLoadSwitch.tsx`) | GraphQL only; sends `X-Batchload: off`, starts a new load and remounts the screen so the scoreboard shows the N+1 cost (club page: 21 queries batched, 50 not) |
+| `useScreenLoad` survives StrictMode's double effects | In development React runs layout effects twice on mount; reusing the load for an immediate re-run stops the first requests being filed under an empty duplicate load |
 | Requests are filed under the load active when they start | Late responses from a screen the user just toggled away from would otherwise inflate the new load |
 | Live screen (`/live`, `resources/js/pages/LivePage.tsx`) | GraphQL only: lists fixtures in play and subscribes each card to `matchUpdated`; client transport in `resources/js/graphql/subscriptions.ts` (urql `subscriptionExchange`, POST then `pusher-js` on the private channel Lighthouse returns, auth via `/graphql/subscriptions/auth`). Match events come with the subscription to keep the list query under the complexity limit |
 | Cache `serializable_classes` allows `Collection` and Lighthouse `Subscriber` only | Laravel 13 refuses to unserialise cached objects by default; Lighthouse's subscriber storage needs these two, everything else stays blocked |
@@ -73,6 +74,6 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 ## Commands
 
 **composer**: setup (install, `.env`, key, migrate --seed, npm install, hooks, build) | dev (serve :8000, reverb :8080, queue, cymru:simulate, vite via `concurrently`) | test | test:coverage | lint | analyse
-**npm**: run prepare (activate git hooks) | run dev | run build | run lint | run typecheck | run codegen
+**npm**: run prepare (activate git hooks) | run dev | run build | run lint | run typecheck | run codegen | run test:e2e
 **artisan**: migrate | db:seed | cymru:import [--enrich] [--distances] | cymru:reset [--as-of=] | cymru:simulate [--tick=] [--pause=] [--rounds=]
 **pest**: ./vendor/bin/pest | ./vendor/bin/pest --coverage --min=90

@@ -79,8 +79,29 @@ export function record(entry: Omit<RequestRecord, 'id'>): void {
  * runs before the data hooks' effects, so their requests land in this load.
  */
 export function useScreenLoad(api: ApiSource, label: string, variant: unknown = null): void {
-    useLayoutEffect(() => beginLoad(api, label), [api, label, variant]);
+    useLayoutEffect(() => {
+        const key = `${label}|${api}|${String(variant)}`;
+
+        if (reusable !== key) {
+            beginLoad(api, label);
+        }
+
+        reusable = null;
+
+        return () => {
+            // React's StrictMode tears effects down and runs them again in the
+            // same task; keep the load (and the requests it already started).
+            reusable = key;
+            setTimeout(() => {
+                if (reusable === key) {
+                    reusable = null;
+                }
+            }, 0);
+        };
+    }, [api, label, variant]);
 }
+
+let reusable: string | null = null;
 
 export interface LoadSummary {
     requests: number;

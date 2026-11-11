@@ -29,3 +29,5 @@ Thumbs.db
 # planning files
 .claude/
 /.playwright-mcp
+/test-results
+/playwright-report

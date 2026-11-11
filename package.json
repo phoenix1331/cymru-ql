@@ -9,12 +9,14 @@
         "typecheck": "tsc --noEmit",
         "lint": "eslint resources/js",
         "codegen:schema": "php artisan lighthouse:print-schema --write --disk=codegen",
-        "codegen": "npm run codegen:schema && graphql-codegen --config codegen.ts"
+        "codegen": "npm run codegen:schema && graphql-codegen --config codegen.ts",
+        "test:e2e": "playwright test"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
         "@graphql-codegen/cli": "^8.0.0",
         "@graphql-codegen/client-preset": "^7.0.0",
+        "@playwright/test": "^1.65.0",
         "@tailwindcss/vite": "^4.0.0",
         "@types/react": "^19.3.0",
         "@types/react-dom": "^19.3.0",
