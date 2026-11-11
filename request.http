@@ -1,0 +1,49 @@
+@baseUrl = http://localhost:8000
+
+### Clubs
+
+# Every club, alphabetically, 20 per page. Note the X-Query-Count header.
+GET {{baseUrl}}/api/clubs
+Accept: application/json
+
+###
+
+# Clubs in one league for the current season.
+GET {{baseUrl}}/api/clubs?league=cymru-premier
+Accept: application/json
+
+###
+
+# Clubs in a league for a past season (2025/26 Cymru Premier had 12 clubs).
+GET {{baseUrl}}/api/clubs?league=cymru-premier&season=2025-26&per_page=50
+Accept: application/json
+
+###
+
+# One club, with a reference to its ground and links to related resources.
+GET {{baseUrl}}/api/clubs/caernarfon-town
+Accept: application/json
+
+###
+
+# A club's league history, newest season first, with final positions.
+GET {{baseUrl}}/api/clubs/bala-town/seasons
+Accept: application/json
+
+###
+
+# Validation errors come back as 422 JSON.
+GET {{baseUrl}}/api/clubs?league=ardal-north-east
+Accept: application/json
+
+### Grounds
+
+# Every ground, alphabetically.
+GET {{baseUrl}}/api/grounds
+Accept: application/json
+
+###
+
+# A shared ground lists both clubs that play there.
+GET {{baseUrl}}/api/grounds/centre-for-sporting-excellence-ystrad-mynach
+Accept: application/json
