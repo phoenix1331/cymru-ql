@@ -1,0 +1,20 @@
+[
+    {
+        "slug": "cymru-premier",
+        "name": "Cymru Premier",
+        "tier": 1,
+        "region": "National"
+    },
+    {
+        "slug": "cymru-north",
+        "name": "Cymru North",
+        "tier": 2,
+        "region": "North"
+    },
+    {
+        "slug": "cymru-south",
+        "name": "Cymru South",
+        "tier": 2,
+        "region": "South"
+    }
+]
