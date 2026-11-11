@@ -34,7 +34,7 @@ it('fetches a club with its ground and league history in one request', function 
     ', ['slug' => 'bala-town'])
         ->assertOk()
         ->assertHeader('X-Query-Count', '5')
-        ->assertExactJson(['data' => ['club' => [
+        ->assertJsonPath('data', ['club' => [
             'name' => 'Bala Town',
             'nickname' => 'The Lakesiders',
             'colour' => '#FFFFFF',
@@ -44,11 +44,11 @@ it('fetches a club with its ground and league history in one request', function 
                 ['position' => 11, 'season' => ['slug' => '2025-26', 'isCurrent' => false], 'league' => ['name' => 'Cymru Premier', 'tier' => 1]],
                 ['position' => null, 'season' => ['slug' => '2026-27', 'isCurrent' => true], 'league' => ['name' => 'Cymru North', 'tier' => 2]],
             ],
-        ]]]);
+        ]]);
 });
 
 it('returns null for an unknown club', function () {
-    $this->graphQL('{ club(slug: "nope") { name } }')->assertExactJson(['data' => ['club' => null]]);
+    $this->graphQL('{ club(slug: "nope") { name } }')->assertJsonPath('data', ['club' => null]);
 });
 
 it('lists seasons and leagues in order', function () {

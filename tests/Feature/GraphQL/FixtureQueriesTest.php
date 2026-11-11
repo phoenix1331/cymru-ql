@@ -77,5 +77,5 @@ it('fetches a fixture with its events in match order', function () {
             ['type' => 'PenaltyGoal', 'minute' => 12, 'homeScore' => 1, 'awayScore' => 0, 'description' => 'Penalty scored for Bala Town', 'club' => ['slug' => 'bala-town'], 'fixture' => ['id' => (string) $this->played->id]],
         ]);
 
-    $this->graphQL('{ fixture(id: 999999) { id } }')->assertExactJson(['data' => ['fixture' => null]]);
+    $this->graphQL('{ fixture(id: 999999) { id } }')->assertJsonPath('data', ['fixture' => null]);
 });

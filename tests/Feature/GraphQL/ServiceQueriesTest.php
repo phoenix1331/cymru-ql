@@ -60,7 +60,7 @@ it('answers the showcase query in one request', function () {
         }
     ', ['slug' => 'caernarfon-town'])->assertOk();
 
-    $response->assertExactJson(['data' => ['club' => [
+    $response->assertJsonPath('data', ['club' => [
         'name' => 'Caernarfon Town',
         'ground' => ['name' => 'Caernarfon Ground'],
         'league' => [
@@ -74,17 +74,17 @@ it('answers the showcase query in one request', function () {
         'awayTrips' => [
             ['roadKm' => 275.4, 'to' => ['name' => 'Barry Ground', 'clubs' => [['name' => 'Barry Town']]]],
         ],
-    ]]]);
+    ]]);
 });
 
 it('returns a league for a season with its clubs and table', function () {
     $this->graphQL('{ league(slug: "cymru-premier", season: "2025-26") { league { slug } season { slug } clubs { slug } table { position played points club { slug } } } }')
-        ->assertExactJson(['data' => ['league' => [
+        ->assertJsonPath('data', ['league' => [
             'league' => ['slug' => 'cymru-premier'],
             'season' => ['slug' => '2025-26'],
             'clubs' => [['slug' => 'bangor-town']],
             'table' => [['position' => 3, 'played' => null, 'points' => null, 'club' => ['slug' => 'bangor-town']]],
-        ]]]);
+        ]]);
 });
 
 it('returns a table directly', function () {
@@ -109,7 +109,7 @@ it('returns no league or away trips for a season the club was not in', function 
     $club = Club::factory()->create(['slug' => 'newcomers']);
 
     $this->graphQL('{ club(slug: "newcomers") { league { league { slug } } awayTrips { roadKm } } }')
-        ->assertExactJson(['data' => ['club' => ['league' => null, 'awayTrips' => []]]]);
+        ->assertJsonPath('data', ['club' => ['league' => null, 'awayTrips' => []]]);
 
     expect($club->exists)->toBeTrue();
 });

@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Data\DataFiles;
 use App\Enums\FixtureStatus;
 use App\Enums\MatchEventType;
+use App\GraphQL\Listeners\AddQueryMetricsExtension;
 use App\Import\Distances\OsrmClient;
 use App\Import\Enrichment\NominatimClient;
 use App\Import\Enrichment\WikidataClient;
@@ -17,7 +18,9 @@ use App\Support\QueryMetrics;
 use GraphQL\Type\Definition\PhpEnumType;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Nuwave\Lighthouse\Events\BuildExtensionsResponse;
 use Nuwave\Lighthouse\Schema\TypeRegistry;
 
 class AppServiceProvider extends ServiceProvider
@@ -68,6 +71,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $types->register(new PhpEnumType(FixtureStatus::class));
         $types->register(new PhpEnumType(MatchEventType::class));
+
+        Event::listen(BuildExtensionsResponse::class, AddQueryMetricsExtension::class);
 
         DB::listen(fn (QueryExecuted $query) => $this->app->make(QueryMetrics::class)->record($query->time));
     }
