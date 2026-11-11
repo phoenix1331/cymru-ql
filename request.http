@@ -201,3 +201,16 @@ Accept: application/json
 {
   "query": "{ fixtures(club: \"caernarfon-town\", status: Finished, first: 5) { data { round kicksOffAt homeClub { name } awayClub { name } homeScore awayScore events { minute type description } } paginatorInfo { total } } }"
 }
+
+###
+
+# N+1 demo: the same query with relation batch loading switched off.
+# Compare extensions.metrics.query_count with the request above (X-Batchload: on).
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+X-Batchload: off
+
+{
+  "query": "{ league(slug: \"cymru-premier\") { clubs { name ground { name clubs { name } } seasons { league { name } season { name } } } } }"
+}

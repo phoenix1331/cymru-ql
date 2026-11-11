@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 use App\Http\Middleware\RecordQueryMetrics;
+use App\Http\Middleware\ToggleBatchLoading;
 use GraphQL\Error\DebugFlag;
 use GraphQL\Validator\Rules\DisableIntrospection;
 use GraphQL\Validator\Rules\QueryComplexity;
@@ -66,6 +67,9 @@ return [
 
             // Query count and timing headers, the same as the REST API.
             RecordQueryMetrics::class,
+
+            // Demo: X-Batchload: off disables relation batch loading for one request.
+            ToggleBatchLoading::class,
         ],
 
         /*

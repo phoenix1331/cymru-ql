@@ -22,6 +22,9 @@ final readonly class AddQueryMetricsExtension
             return null;
         }
 
-        return new ExtensionsResponse('metrics', $this->metrics->snapshot());
+        return new ExtensionsResponse('metrics', [
+            ...$this->metrics->snapshot(),
+            'batchload' => (bool) config('lighthouse.batchload_relations'),
+        ]);
     }
 }

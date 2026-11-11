@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final readonly class RecordQueryMetrics
 {
-    public const array HEADERS = ['X-Query-Count', 'X-Query-Time-Ms', 'X-Response-Time-Ms', 'Server-Timing'];
+    public const array HEADERS = ['X-Query-Count', 'X-Query-Time-Ms', 'X-Response-Time-Ms', 'Server-Timing', 'X-Batchload'];
 
     public function __construct(private QueryMetrics $metrics) {}
 

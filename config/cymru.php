@@ -33,6 +33,14 @@ return [
         'enabled' => (bool) env('CYMRU_METRICS', true),
     ],
 
+    /*
+    | Demo switches. Allow GraphQL clients to turn relation batch loading off
+    | per request (X-Batchload: off) to show N+1 queries. Off in production.
+    */
+    'demo' => [
+        'batchload_toggle' => (bool) env('CYMRU_BATCHLOAD_TOGGLE', env('APP_ENV') !== 'production'),
+    ],
+
     'simulation' => [
         // Fixed seed so every install simulates the same results.
         'seed' => (int) env('CYMRU_SIMULATION_SEED', 1331),
