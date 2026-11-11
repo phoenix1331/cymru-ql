@@ -1,0 +1,14 @@
+# The closest grounds by road, and as the crow flies.
+query NearbyGrounds($ground: String! = "park-hall-oswestry") {
+  nearbyGrounds(ground: $ground, limit: 5) {
+    roadKm
+    straightKm
+    to {
+      name
+      town
+      clubs {
+        name
+      }
+    }
+  }
+}

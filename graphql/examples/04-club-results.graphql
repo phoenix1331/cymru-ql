@@ -1,0 +1,25 @@
+# A club's results this season, each with its match events.
+query ClubResults($club: String! = "the-new-saints") {
+  fixtures(club: $club, status: Finished, first: 5) {
+    data {
+      round
+      kicksOffAt
+      homeClub {
+        name
+      }
+      awayClub {
+        name
+      }
+      homeScore
+      awayScore
+      events {
+        minute
+        type
+        description
+      }
+    }
+    paginatorInfo {
+      total
+    }
+  }
+}

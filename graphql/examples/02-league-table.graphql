@@ -1,0 +1,11 @@
+# A league table for a past season. Seasons without results list the final
+# positions, so the stats come back null.
+query LeagueTable($league: String! = "cymru-north", $season: String = "2025-26") {
+  table(league: $league, season: $season) {
+    position
+    club {
+      name
+    }
+    points
+  }
+}

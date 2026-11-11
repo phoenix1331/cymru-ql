@@ -1,0 +1,41 @@
+# A club with its ground, its league table and the road distance to every
+# other ground in its league: one request. Try the same screen over REST in
+# the app and compare the request count.
+query ClubShowcase($slug: String! = "caernarfon-town") {
+  club(slug: $slug) {
+    name
+    nickname
+    ground {
+      name
+      town
+      capacity
+    }
+    league {
+      league {
+        name
+      }
+      season {
+        name
+      }
+      table {
+        position
+        club {
+          name
+        }
+        played
+        points
+        goalDifference
+        form
+      }
+    }
+    awayTrips {
+      roadKm
+      to {
+        name
+        clubs {
+          name
+        }
+      }
+    }
+  }
+}

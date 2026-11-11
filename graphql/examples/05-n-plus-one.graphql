@@ -1,0 +1,25 @@
+# headers: {"X-Batchload": "off"}
+# The N+1 demo. This tab sends X-Batchload: off (see Headers below), so each
+# club's ground and seasons are fetched one club at a time. Compare
+# extensions.metrics.query_count with batch loading on (delete the header).
+query LeagueClubs($league: String! = "cymru-premier") {
+  league(slug: $league) {
+    clubs {
+      name
+      ground {
+        name
+        clubs {
+          name
+        }
+      }
+      seasons {
+        season {
+          name
+        }
+        league {
+          name
+        }
+      }
+    }
+  }
+}

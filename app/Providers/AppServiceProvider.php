@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Data\DataFiles;
 use App\Enums\FixtureStatus;
 use App\Enums\MatchEventType;
+use App\GraphQL\ExampleQueries;
 use App\GraphQL\Listeners\AddQueryMetricsExtension;
 use App\GraphQL\Validation\ValidationRulesProvider;
 use App\Import\Distances\OsrmClient;
@@ -38,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             DataFiles::class,
             fn (): DataFiles => new DataFiles((string) config('cymru.data_path')),
+        );
+
+        $this->app->bind(
+            ExampleQueries::class,
+            fn (): ExampleQueries => new ExampleQueries(base_path('graphql/examples')),
         );
 
         $this->app->bind(

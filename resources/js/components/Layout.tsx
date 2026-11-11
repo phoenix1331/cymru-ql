@@ -23,6 +23,9 @@ export function Layout() {
                             </NavLink>
                         ))}
                     </nav>
+                    <a href="/graphiql" className="ml-auto font-display text-lg font-semibold text-graphql">
+                        Query playground
+                    </a>
                 </div>
             </header>
 
