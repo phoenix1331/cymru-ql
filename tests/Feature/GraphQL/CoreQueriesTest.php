@@ -69,7 +69,7 @@ it('paginates clubs alphabetically and caps the page size', function () {
         ->assertJsonPath('data.clubs.data.*.name', ['Aberystwyth Town', 'Bala Town'])
         ->assertJsonPath('data.clubs.paginatorInfo', ['total' => 3, 'currentPage' => 1, 'lastPage' => 2]);
 
-    $this->graphQL('{ clubs(first: 500) { data { name } } }')->assertGraphQLErrorMessage('Maximum number of 100 requested items exceeded, got 500. Fetch smaller chunks.');
+    $this->graphQL('{ clubs(first: 101) { data { name } } }')->assertGraphQLErrorMessage('Maximum number of 100 requested items exceeded, got 101. Fetch smaller chunks.');
 });
 
 it('shows a ground with the clubs that play there', function () {

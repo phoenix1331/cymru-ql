@@ -8,6 +8,7 @@ use App\Data\DataFiles;
 use App\Enums\FixtureStatus;
 use App\Enums\MatchEventType;
 use App\GraphQL\Listeners\AddQueryMetricsExtension;
+use App\GraphQL\Validation\ValidationRulesProvider;
 use App\Import\Distances\OsrmClient;
 use App\Import\Enrichment\NominatimClient;
 use App\Import\Enrichment\WikidataClient;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Nuwave\Lighthouse\Events\BuildExtensionsResponse;
 use Nuwave\Lighthouse\Schema\TypeRegistry;
+use Nuwave\Lighthouse\Support\Contracts\ProvidesValidationRules;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(QueryMetrics::class);
+        $this->app->bind(ProvidesValidationRules::class, ValidationRulesProvider::class);
 
         $this->app->bind(
             DataFiles::class,

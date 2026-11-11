@@ -214,3 +214,25 @@ X-Batchload: off
 {
   "query": "{ league(slug: \"cymru-premier\") { clubs { name ground { name clubs { name } } seasons { league { name } season { name } } } } }"
 }
+
+###
+
+# Rejected: deeper than the configured maximum query depth (8).
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "{ clubs(first: 2) { data { ground { clubs { ground { clubs { ground { clubs { ground { clubs { name } } } } } } } } } } }"
+}
+
+###
+
+# Rejected: more expensive than the configured maximum complexity (1000).
+POST {{baseUrl}}/graphql
+Content-Type: application/json
+Accept: application/json
+
+{
+  "query": "{ clubs(first: 100) { data { name nickname colour founded ground { name town capacity clubs { name slug } } } } }"
+}
