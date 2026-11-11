@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Builder;
 final class FixtureService
 {
     /**
+     * @param  list<string>  $with  relations to eager load
      * @return LengthAwarePaginator<int, Fixture>
      */
-    public function paginate(FixtureFilters $filters, int $perPage = 20): LengthAwarePaginator
+    public function paginate(FixtureFilters $filters, int $perPage = 20, array $with = []): LengthAwarePaginator
     {
-        return $this->query($filters)->paginate($perPage);
+        return $this->query($filters)->with($with)->paginate($perPage);
     }
 
     public function find(int $id): Fixture

@@ -102,3 +102,32 @@ Accept: application/json
 # One directed pair. Road distances can differ slightly by direction.
 GET {{baseUrl}}/api/grounds/the-new-oval-holyhead/distances/newport-stadium-newport
 Accept: application/json
+
+### Fixtures
+
+# This season's fixtures in kick off order, 20 per page.
+GET {{baseUrl}}/api/fixtures
+Accept: application/json
+
+###
+
+# One club's results so far this season.
+GET {{baseUrl}}/api/fixtures?club=caernarfon-town&status=finished&per_page=50
+Accept: application/json
+
+###
+
+# A league's fixtures between two dates.
+GET {{baseUrl}}/api/fixtures?league=cymru-north&from=2026-11-01&to=2026-11-30
+Accept: application/json
+
+###
+
+# One fixture, then its match events (kick off, goals, cards, half and full time).
+GET {{baseUrl}}/api/fixtures/1
+Accept: application/json
+
+###
+
+GET {{baseUrl}}/api/fixtures/1/events
+Accept: application/json
