@@ -30,7 +30,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Query metrics | `app/Support/QueryMetrics.php`, `app/Http/Middleware/RecordQueryMetrics.php` | `DB::listen` counts queries per request; middleware (on the `api` group, alias `query.metrics`) adds `X-Query-Count`, `X-Query-Time-Ms`, `X-Response-Time-Ms`, `Server-Timing`. Toggle: `CYMRU_METRICS` |
 | REST | `routes/api.php` (`/api`, wired in `bootstrap/app.php`, no Sanctum), `app/Http/Controllers/Api/`, `app/Http/Resources/` | Resource oriented: own fields plus slug/name references and `links` to related resources, no deep nesting. Slugs in URLs resolved via services (404 JSON when unknown). Endpoints: seasons, leagues, league table (`meta.basis`: results or final_positions), clubs, club seasons, grounds, nearby grounds, distances in a league (away trips with total), distance between two grounds, fixtures (filters: season, league, club, status, dates, round) and match events. Examples in `request.http` |
 | GraphQL | `graphql/schema.graphql` (Lighthouse 6, `/graphql`), `config/lighthouse.php` | Schema first. Simple lookups use `@find`, `@all`, `@paginate` (default 20, max 100) and relation directives (`@belongsTo`, `@hasMany`, batch loaded); derived data goes through the shared services via resolvers in `app/GraphQL/Queries/` (`league`, `table`, `nearbyGrounds`, `Club.league`, `Club.awayTrips`, `Ground.nearby`, `Ground.distancesInLeague`, paginated `fixtures` built from `FixtureService::query`; `Lookup` maps unknown slugs to client-safe `NotFound` errors). Same query-metrics middleware as REST, plus `extensions.metrics` in the body (`app/GraphQL/Listeners/AddQueryMetricsExtension.php` on `BuildExtensionsResponse`). Tests use `MakesGraphQLRequests` |
-| Live feed | Lighthouse subscriptions over Reverb | Fixture simulator command pushes match events |
+| Live feed | Laravel Reverb (`config/reverb.php`, `config/broadcasting.php`, port 8080, `php artisan reverb:start`), Lighthouse `reverb` broadcaster | Subscription storage uses the `database` cache store (no Redis in this stack). `.env.example` ships fixed local Reverb keys. Tests broadcast to the log |
 
 ## Decisions
 
@@ -65,6 +65,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Screens: one view model, two data hooks (`resources/js/screens/<screen>/`) | `useXRest` and `useXGraphQL` both return `ScreenData<View>`; one view component renders either, so the screen is identical and only the cost differs. REST follows links the normal way (club page: 20 requests including one per away ground; GraphQL: 1) |
 | Batch loading switch in the panel (`BatchLoadSwitch.tsx`) | GraphQL only; sends `X-Batchload: off`, starts a new load and remounts the screen so the scoreboard shows the N+1 cost (club page: 21 queries batched, 50 not) |
 | Requests are filed under the load active when they start | Late responses from a screen the user just toggled away from would otherwise inflate the new load |
+| No Redis | Native setup stays PHP + MySQL + Node; Lighthouse subscription storage and the queue use the database |
 | Generated placeholder crests (`resources/js/components/Crest.tsx`) | Avoid shipping third-party club badges: SVG shield in the club colour, pattern hashed from the slug, initials in contrasting text |
 
 ## Commands
