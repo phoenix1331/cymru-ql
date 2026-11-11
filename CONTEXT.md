@@ -11,6 +11,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Tests | Pest 5, in-memory SQLite (`phpunit.xml`), coverage via pcov, 90% minimum on `app/`. Playwright smoke tests in `e2e/` (`npm run test:e2e`, `playwright.config.ts`, starts `php artisan serve` unless one is running; needs the seeded MySQL database) |
 | Front end | React 19 + TypeScript + Tailwind 4 via Vite inside Laravel (`resources/js/`), React Router (`router.tsx`), ESLint + `tsc` (`npm run lint`, `npm run typecheck`). One Blade view (`resources/views/app.blade.php`) served by a catch-all web route that skips `/api`, `/graphql`, `/graphiql`, `/up` |
 | Containers | None. No Docker, no Makefile |
+| CI | `.github/workflows/ci.yml` | `quality` (Pint, Larastan, ESLint, tsc), `coverage` (Pest + pcov, `--min=90`, SQLite), `app` (runner's own MySQL started with systemctl, `composer setup`, Playwright against `php artisan serve`); fails if the clone-and-setup path breaks |
 | Git hooks | Husky (`.husky/`): `commit-msg` (lowercase conventional commits), `pre-commit` (Pint, Larastan, osv-scanner) |
 | Static analysis | Larastan, level 6 (`phpstan.neon`) |
 
