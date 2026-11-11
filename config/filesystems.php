@@ -32,6 +32,15 @@ return [
 
     'disks' => [
 
+        // Target for `php artisan lighthouse:print-schema --write --disk=codegen`,
+        // the schema graphql-codegen generates the front end types from.
+        'codegen' => [
+            'driver' => 'local',
+            'root' => resource_path('js/graphql'),
+            'throw' => true,
+            'report' => false,
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),

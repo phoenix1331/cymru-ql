@@ -56,11 +56,12 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Enrichment fills nulls only, plus an overrides file | Over the Terraces values were reconciled by hand and win; Wikidata has stale entries (old Rhyl F.C. not marked dissolved), so corrections live in a reviewable JSON file |
 | Tests block stray HTTP | `Http::preventStrayRequests()` in `tests/Pest.php`; external APIs are always faked |
 | Visual identity | Chalk/slate/pitch green palette; REST is estuary blue `#2F6690`, GraphQL is Welsh red `#C8102E` everywhere. Barlow Condensed (signage/scoreboard) for headings and numbers, Atkinson Hyperlegible for body, via Bunny Fonts. Tokens in `resources/css/app.css` `@theme` |
+| GraphQL client: urql + graphql-codegen client preset | User choice (urql over Apollo). `npm run codegen` writes the Lighthouse schema to `resources/js/graphql/lighthouse-schema.graphql` (via the `codegen` filesystem disk) and typed documents to `resources/js/graphql/generated/`; both committed so the front end builds without PHP. A Pest test fails if the committed schema drifts. All documents live in `resources/js/graphql/documents.ts` |
 | Generated placeholder crests | Avoid shipping third-party club badges |
 
 ## Commands
 
 **composer**: setup | dev | test | test:coverage | lint | analyse
-**npm**: run prepare (activate git hooks) | run dev | run build | run lint | run typecheck
+**npm**: run prepare (activate git hooks) | run dev | run build | run lint | run typecheck | run codegen
 **artisan**: migrate | db:seed | cymru:import [--enrich] [--distances] | cymru:reset [--as-of=]
 **pest**: ./vendor/bin/pest | ./vendor/bin/pest --coverage --min=90

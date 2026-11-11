@@ -1,0 +1,337 @@
+enum FixtureStatus {
+  Scheduled
+  Live
+  Finished
+}
+
+enum MatchEventType {
+  KickOff
+  Goal
+  PenaltyGoal
+  OwnGoal
+  YellowCard
+  RedCard
+  HalfTime
+  FullTime
+}
+
+type Query {
+  "Every season, newest first."
+  seasons: [Season!]!
+
+  "A season by slug, e.g. `2026-27`."
+  season(slug: String!): Season
+
+  "The three leagues in scope, by tier."
+  leagues: [League!]!
+
+  "A club by slug, e.g. `caernarfon-town`."
+  club(slug: String!): Club
+
+  "A ground by slug, e.g. `the-oval-caernarfon`."
+  ground(slug: String!): Ground
+
+  "A league in one season (current by default), with its clubs and table."
+  league(slug: String!, season: String): LeagueSeason!
+
+  "A league table. Seasons without results list the recorded final positions with null stats."
+  table(league: String!, season: String): [TableRow!]!
+
+  "The closest grounds to a ground by road, optionally only those used by one league's clubs."
+  nearbyGrounds(ground: String!, limit: Int! = 5, league: String, season: String): [Distance!]!
+
+  "A fixture by id."
+  fixture(id: ID!): Fixture
+
+  "Every club, alphabetically."
+  clubs(
+    "Limits number of fetched items. Maximum allowed value: 100."
+    first: Int! = 20
+
+    "The offset from which items are returned."
+    page: Int
+  ): ClubPaginator!
+
+  "Every ground, alphabetically."
+  grounds(
+    "Limits number of fetched items. Maximum allowed value: 100."
+    first: Int! = 20
+
+    "The offset from which items are returned."
+    page: Int
+  ): GroundPaginator!
+
+  "Fixtures for a season (current by default) in kick off order, with optional filters."
+  fixtures(
+    season: String
+    league: String
+    club: String
+    status: FixtureStatus
+    from: DateTimeTz
+    to: DateTimeTz
+    round: Int
+
+    "Limits number of fetched items. Maximum allowed value: 100."
+    first: Int! = 20
+
+    "The offset from which items are returned."
+    page: Int
+  ): FixturePaginator!
+}
+
+"An ISO 8601 date, e.g. `2026-08-01`."
+scalar Date
+
+"An ISO 8601 date and time with offset, e.g. `2026-08-01T13:30:00+00:00`."
+scalar DateTimeTz
+
+"A football season, August to May."
+type Season {
+  slug: String!
+  name: String!
+  startsOn: Date!
+  endsOn: Date!
+  isCurrent: Boolean!
+}
+
+"A league in the Welsh pyramid. Tier 1 is the Cymru Premier."
+type League {
+  slug: String!
+  name: String!
+  tier: Int!
+  region: String!
+}
+
+"A football ground. Some grounds are shared by more than one club."
+type Ground {
+  slug: String!
+  name: String!
+  town: String!
+  latitude: Float!
+  longitude: Float!
+  capacity: Int
+  opened: Int
+  address: String
+  description: String
+
+  "Clubs that play their home games here."
+  clubs: [Club!]!
+
+  "The closest other grounds by road."
+  nearby(limit: Int! = 5): [Distance!]!
+
+  "Distances to every ground in a league, nearest first."
+  distancesInLeague(league: String!, season: String): [Distance!]!
+}
+
+"A football club."
+type Club {
+  slug: String!
+  name: String!
+  nickname: String
+
+  "Primary club colour as a hex value, e.g. `#F1B434`."
+  colour: String!
+
+  founded: Int
+  ground: Ground!
+
+  "League membership by season."
+  seasons: [ClubSeason!]!
+
+  "The league the club plays in for a season (current by default)."
+  league(season: String): LeagueSeason
+
+  "Road distance to every other ground in the club's league for a season: its away trips."
+  awayTrips(season: String): [Distance!]!
+}
+
+"A club's league for one season, with its final position once the season is over."
+type ClubSeason {
+  club: Club!
+  season: Season!
+  league: League!
+  position: Int
+}
+
+"A league in one season."
+type LeagueSeason {
+  league: League!
+  season: Season!
+
+  "Clubs in the league that season, alphabetically."
+  clubs: [Club!]!
+
+  "The league table for that season."
+  table: [TableRow!]!
+}
+
+"One line of a league table. Stats are null when only the final position is recorded."
+type TableRow {
+  position: Int!
+  club: Club!
+  played: Int
+  won: Int
+  drawn: Int
+  lost: Int
+  goalsFor: Int
+  goalsAgainst: Int
+  goalDifference: Int
+  points: Int
+
+  "Last five results, oldest first: W, D or L."
+  form: [String!]
+}
+
+"Distance from one ground to another. Road distance can differ slightly by direction."
+type Distance {
+  from: Ground!
+  to: Ground!
+  roadKm: Float!
+  straightKm: Float!
+}
+
+"A match between two clubs. Scores are null until it kicks off."
+type Fixture {
+  id: ID!
+  round: Int!
+  kicksOffAt: DateTimeTz!
+  status: FixtureStatus!
+
+  "Match minute while live, 90 once finished."
+  minute: Int
+
+  homeScore: Int
+  awayScore: Int
+  homeClub: Club!
+  awayClub: Club!
+  ground: Ground!
+  league: League!
+  season: Season!
+
+  "Kick off, goals, cards, half time and full time, in match order."
+  events: [MatchEvent!]!
+}
+
+"Something that happened in a match, with the score after it."
+type MatchEvent {
+  id: ID!
+  type: MatchEventType!
+  minute: Int!
+  homeScore: Int!
+  awayScore: Int!
+  description: String
+
+  "The club the event belongs to; for an own goal, the club credited with it."
+  club: Club
+
+  fixture: Fixture!
+}
+
+"Information about pagination using a fully featured paginator."
+type PaginatorInfo {
+  "Number of items in the current page."
+  count: Int!
+
+  "Index of the current page."
+  currentPage: Int!
+
+  "Index of the first item in the current page."
+  firstItem: Int
+
+  "Are there more pages after this one?"
+  hasMorePages: Boolean!
+
+  "Index of the last item in the current page."
+  lastItem: Int
+
+  "Index of the last available page."
+  lastPage: Int!
+
+  "Number of items per page."
+  perPage: Int!
+
+  "Number of total available items."
+  total: Int!
+}
+
+"A paginated list of Club items."
+type ClubPaginator {
+  "Pagination information about the list of items."
+  paginatorInfo: PaginatorInfo!
+
+  "A list of Club items."
+  data: [Club!]!
+}
+
+"A paginated list of Ground items."
+type GroundPaginator {
+  "Pagination information about the list of items."
+  paginatorInfo: PaginatorInfo!
+
+  "A list of Ground items."
+  data: [Ground!]!
+}
+
+"A paginated list of Fixture items."
+type FixturePaginator {
+  "Pagination information about the list of items."
+  paginatorInfo: PaginatorInfo!
+
+  "A list of Fixture items."
+  data: [Fixture!]!
+}
+
+"Directions for ordering a list of records."
+enum SortOrder {
+  "Sort records in ascending order."
+  ASC
+
+  "Sort records in descending order."
+  DESC
+}
+
+"Aggregate functions when ordering by a relation without specifying a column."
+enum OrderByRelationAggregateFunction {
+  "Amount of items."
+  COUNT
+}
+
+"Aggregate functions when ordering by a relation that may specify a column."
+enum OrderByRelationWithColumnAggregateFunction {
+  "Average."
+  AVG
+
+  "Minimum."
+  MIN
+
+  "Maximum."
+  MAX
+
+  "Sum."
+  SUM
+
+  "Amount of items."
+  COUNT
+}
+
+"Allows ordering a list of records."
+input OrderByClause {
+  "The column that is used for ordering."
+  column: String!
+
+  "The direction that is used for ordering."
+  order: SortOrder!
+}
+
+"Specify if you want to include or exclude trashed results from a query."
+enum Trashed {
+  "Only return trashed results."
+  ONLY
+
+  "Return both trashed and non-trashed results."
+  WITH
+
+  "Only return non-trashed results."
+  WITHOUT
+}
