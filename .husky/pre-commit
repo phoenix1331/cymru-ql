@@ -7,6 +7,13 @@ if ! ./vendor/bin/pint --test; then
   exit 1
 fi
 
+# Static analysis
+echo "running larastan..."
+if ! ./vendor/bin/phpstan analyse --memory-limit=1G --no-progress; then
+  echo "error: larastan found issues. run composer analyse for details."
+  exit 1
+fi
+
 # Security audit via osv-scanner CLI
 if ! command -v osv-scanner > /dev/null 2>&1; then
   echo "error: osv-scanner not found. install it: https://github.com/google/osv-scanner"

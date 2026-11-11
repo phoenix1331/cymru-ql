@@ -11,7 +11,8 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Tests | Pest 5, in-memory SQLite (`phpunit.xml`), coverage via pcov, 90% minimum on `app/` |
 | Front end | Vite (React + TypeScript + Tailwind planned) |
 | Containers | None. No Docker, no Makefile |
-| Git hooks | Husky (`.husky/`): `commit-msg` (lowercase conventional commits), `pre-commit` (Pint, osv-scanner) |
+| Git hooks | Husky (`.husky/`): `commit-msg` (lowercase conventional commits), `pre-commit` (Pint, Larastan, osv-scanner) |
+| Static analysis | Larastan, level 6 (`phpstan.neon`) |
 
 ## Planned architecture
 
@@ -38,7 +39,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 
 ## Commands
 
-**composer**: setup | dev | test
+**composer**: setup | dev | test | test:coverage | lint | analyse
 **npm**: run prepare (activate git hooks)
 **artisan**: migrate | db:seed | cymru:import (planned) | cymru:reset (planned)
 **pest**: ./vendor/bin/pest | ./vendor/bin/pest --coverage --min=90
