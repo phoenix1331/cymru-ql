@@ -1,11 +1,14 @@
 import { useScreenComparison } from '@/api/recorder';
+import { useSettings } from '@/api/settings';
 import { ApiToggle } from './ApiToggle';
+import { BatchLoadSwitch } from './BatchLoadSwitch';
 import { RequestLog } from './RequestLog';
 import { Scoreboard } from './Scoreboard';
 
 /** What the current screen cost to load, and how that compares across APIs. */
 export function ComparisonPanel() {
     const { load, records, rest, graphql } = useScreenComparison();
+    const { source } = useSettings();
 
     return (
         <aside aria-labelledby="comparison-heading" className="flex flex-col gap-5">
@@ -13,6 +16,7 @@ export function ComparisonPanel() {
                 What this cost
             </h2>
             <ApiToggle />
+            {source === 'graphql' && <BatchLoadSwitch />}
 
             {load ? (
                 <>

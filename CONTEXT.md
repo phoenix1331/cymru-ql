@@ -62,6 +62,8 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Comparison panel (`resources/js/components/ComparisonPanel.tsx`) | Right rail on desktop, below content on mobile: API toggle, a scoreboard of the latest REST and GraphQL loads of the same screen (requests, bytes, wall time, DB queries; lower figure brighter), and the current load's request log with raw request bodies |
 | No client cache across screen loads (TanStack `staleTime: 0`, urql `network-only`) | Revisiting a screen would otherwise show zero requests; every load is a real round trip so the scoreboard is honest |
 | Screens: one view model, two data hooks (`resources/js/screens/<screen>/`) | `useXRest` and `useXGraphQL` both return `ScreenData<View>`; one view component renders either, so the screen is identical and only the cost differs. REST follows links the normal way (club page: 20 requests including one per away ground; GraphQL: 1) |
+| Batch loading switch in the panel (`BatchLoadSwitch.tsx`) | GraphQL only; sends `X-Batchload: off`, starts a new load and remounts the screen so the scoreboard shows the N+1 cost (club page: 21 queries batched, 50 not) |
+| Requests are filed under the load active when they start | Late responses from a screen the user just toggled away from would otherwise inflate the new load |
 | Generated placeholder crests (`resources/js/components/Crest.tsx`) | Avoid shipping third-party club badges: SVG shield in the club colour, pattern hashed from the slug, initials in contrasting text |
 
 ## Commands

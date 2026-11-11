@@ -16,9 +16,9 @@ function ClubFromGraphQL({ slug }: { slug: string }) {
 
 export function ClubPage() {
     const slug = useParams().slug ?? '';
-    const { source } = useSettings();
+    const { source, batchload } = useSettings();
 
-    useScreenLoad(source, `Club: ${slug}`);
+    useScreenLoad(source, `Club: ${slug}`, batchload);
 
-    return source === 'rest' ? <ClubFromRest key={slug} slug={slug} /> : <ClubFromGraphQL key={slug} slug={slug} />;
+    return source === 'rest' ? <ClubFromRest key={slug} slug={slug} /> : <ClubFromGraphQL key={`${slug}-${batchload}`} slug={slug} />;
 }

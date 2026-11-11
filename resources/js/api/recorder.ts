@@ -74,11 +74,12 @@ export function record(entry: Omit<RequestRecord, 'id'>): void {
 }
 
 /**
- * Starts a new screen load whenever the screen or API changes. A layout effect
+ * Starts a new screen load whenever the screen, the API or a variant of the
+ * same screen (such as batch loading on or off) changes. A layout effect
  * runs before the data hooks' effects, so their requests land in this load.
  */
-export function useScreenLoad(api: ApiSource, label: string): void {
-    useLayoutEffect(() => beginLoad(api, label), [api, label]);
+export function useScreenLoad(api: ApiSource, label: string, variant: unknown = null): void {
+    useLayoutEffect(() => beginLoad(api, label), [api, label, variant]);
 }
 
 export interface LoadSummary {
@@ -87,6 +88,8 @@ export interface LoadSummary {
     /** Wall clock time from the first request starting to the last finishing. */
     durationMs: number;
     queryCount: number;
+    /** False when any GraphQL request in the load ran without batch loading. */
+    batchload: boolean | null;
 }
 
 export function summarise(records: RequestRecord[]): LoadSummary | null {
@@ -99,6 +102,7 @@ export function summarise(records: RequestRecord[]): LoadSummary | null {
         bytes: records.reduce((total, entry) => total + entry.bytes, 0),
         durationMs: Math.max(...records.map((entry) => entry.endedAt)) - Math.min(...records.map((entry) => entry.startedAt)),
         queryCount: records.reduce((total, entry) => total + (entry.queryCount ?? 0), 0),
+        batchload: records.some((entry) => entry.batchload === false) ? false : (records[0]?.batchload ?? null),
     };
 }
 

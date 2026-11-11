@@ -48,6 +48,7 @@ export function Scoreboard({ rest, graphql }: { rest: LoadSummary | null; graphq
                     </th>
                     <th scope="col" className="border-t-4 border-graphql px-3 pt-2 pb-1 text-right font-display text-xl font-semibold">
                         GraphQL
+                        {graphql?.batchload === false && <span className="block font-sans text-xs font-normal text-white/70">batching off</span>}
                     </th>
                 </tr>
             </thead>

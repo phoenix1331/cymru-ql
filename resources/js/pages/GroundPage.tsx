@@ -16,9 +16,9 @@ function GroundFromGraphQL({ slug }: { slug: string }) {
 
 export function GroundPage() {
     const slug = useParams().slug ?? '';
-    const { source } = useSettings();
+    const { source, batchload } = useSettings();
 
-    useScreenLoad(source, `Ground: ${slug}`);
+    useScreenLoad(source, `Ground: ${slug}`, batchload);
 
-    return source === 'rest' ? <GroundFromRest key={slug} slug={slug} /> : <GroundFromGraphQL key={slug} slug={slug} />;
+    return source === 'rest' ? <GroundFromRest key={slug} slug={slug} /> : <GroundFromGraphQL key={`${slug}-${batchload}`} slug={slug} />;
 }

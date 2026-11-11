@@ -22,9 +22,9 @@ function LeagueFromGraphQL({ slug, season }: Props) {
 export function LeaguePage() {
     const slug = useParams().slug ?? '';
     const season = useSearchParams()[0].get('season') ?? undefined;
-    const { source } = useSettings();
+    const { source, batchload } = useSettings();
 
-    useScreenLoad(source, `League: ${slug} ${season ?? 'current'}`);
+    useScreenLoad(source, `League: ${slug} ${season ?? 'current'}`, batchload);
 
-    return source === 'rest' ? <LeagueFromRest slug={slug} season={season} /> : <LeagueFromGraphQL slug={slug} season={season} />;
+    return source === 'rest' ? <LeagueFromRest slug={slug} season={season} /> : <LeagueFromGraphQL key={String(batchload)} slug={slug} season={season} />;
 }
