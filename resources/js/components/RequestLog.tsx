@@ -35,7 +35,7 @@ export function RequestLog({ records }: { records: RequestRecord[] }) {
                                 <span className={entry.status >= 400 ? 'text-graphql' : undefined}>{entry.status}</span>
                                 <span>{formatBytes(entry.bytes)}</span>
                                 <span>{formatMs(entry.durationMs)}</span>
-                                {entry.queryCount !== null && <span>{entry.queryCount} queries</span>}
+                                {entry.queryCount !== null && <span>{entry.queryCount} {entry.queryCount === 1 ? 'query' : 'queries'}</span>}
                                 {entry.batchload === false && <span className="text-graphql">batch loading off</span>}
                             </span>
                         </summary>

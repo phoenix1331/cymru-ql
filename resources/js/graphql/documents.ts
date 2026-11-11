@@ -86,3 +86,28 @@ export const ClubPageDocument = graphql(`
         }
     }
 `);
+
+export const LeaguePageDocument = graphql(`
+    query LeaguePage($slug: String!, $season: String) {
+        seasons {
+            slug
+            name
+            isCurrent
+        }
+        league(slug: $slug, season: $season) {
+            league {
+                slug
+                name
+                tier
+                region
+            }
+            season {
+                slug
+                name
+            }
+            table {
+                ...TableRowFields
+            }
+        }
+    }
+`);
