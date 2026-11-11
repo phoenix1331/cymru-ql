@@ -11,6 +11,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Tests | Pest 5, in-memory SQLite (`phpunit.xml`), coverage via pcov, 90% minimum on `app/` |
 | Front end | Vite (React + TypeScript + Tailwind planned) |
 | Containers | None. No Docker, no Makefile |
+| Git hooks | Husky (`.husky/`): `commit-msg` (lowercase conventional commits), `pre-commit` (Pint, osv-scanner) |
 
 ## Planned architecture
 
@@ -32,10 +33,12 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Tests on in-memory SQLite, app on MySQL | Fast, isolated tests with no second database to create; MySQL-specific SQL needs care |
 | Committed JSON seed data | Seeding needs no network access; external sources are only hit by `cymru:import` |
 | Simulated fixtures by default | No API keys needed to run; TheSportsDB is an optional extra |
+| Hooks activated by `npm run prepare` | Laravel's `.npmrc` sets `ignore-scripts=true`, so `npm install` skips Husky's `prepare` script; `composer setup` will call it |
 | Generated placeholder crests | Avoid shipping third-party club badges |
 
 ## Commands
 
 **composer**: setup | dev | test
+**npm**: run prepare (activate git hooks)
 **artisan**: migrate | db:seed | cymru:import (planned) | cymru:reset (planned)
 **pest**: ./vendor/bin/pest | ./vendor/bin/pest --coverage --min=90
