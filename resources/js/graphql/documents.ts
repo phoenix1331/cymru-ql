@@ -146,3 +146,66 @@ export const GroundPageDocument = graphql(`
         }
     }
 `);
+
+export const LiveMatchesDocument = graphql(`
+    query LiveMatches {
+        live: fixtures(status: Live, first: 24) {
+            data {
+                ...LiveFixtureFields
+            }
+        }
+        upcoming: fixtures(status: Scheduled, first: 24) {
+            data {
+                id
+                round
+                league {
+                    name
+                }
+                homeClub {
+                    name
+                }
+                awayClub {
+                    name
+                }
+            }
+        }
+    }
+
+    fragment LiveFixtureFields on Fixture {
+        id
+        round
+        kicksOffAt
+        status
+        minute
+        homeScore
+        awayScore
+        league {
+            slug
+            name
+        }
+        homeClub {
+            slug
+            name
+            colour
+        }
+        awayClub {
+            slug
+            name
+            colour
+        }
+    }
+`);
+
+export const MatchUpdatedDocument = graphql(`
+    subscription MatchUpdated($fixtureId: ID!) {
+        matchUpdated(fixtureId: $fixtureId) {
+            ...LiveFixtureFields
+            events {
+                id
+                minute
+                type
+                description
+            }
+        }
+    }
+`);

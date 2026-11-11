@@ -1,6 +1,7 @@
-import { Client, cacheExchange, fetchExchange } from 'urql';
+import { Client, cacheExchange, fetchExchange, subscriptionExchange } from 'urql';
 import { instrumentedFetch } from '@/api/instrumentedFetch';
 import { settings } from '@/api/settings';
+import { forwardSubscription } from './subscriptions';
 
 /**
  * urql client for the Lighthouse endpoint. Every request goes through
@@ -9,7 +10,7 @@ import { settings } from '@/api/settings';
  */
 export const graphqlClient = new Client({
     url: '/graphql',
-    exchanges: [cacheExchange, fetchExchange],
+    exchanges: [cacheExchange, fetchExchange, subscriptionExchange({ forwardSubscription })],
     preferGetMethod: false,
     // Match the REST client: no answers from cache, so each screen load is measured.
     requestPolicy: 'network-only',

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Nuwave\Lighthouse\Subscriptions\Subscriber;
 
 return [
 
@@ -133,6 +135,11 @@ return [
     |
     */
 
-    'serializable_classes' => false,
+    // Lighthouse keeps GraphQL subscribers in the cache (database store), so
+    // its subscriber collections must survive unserialising. Nothing else may.
+    'serializable_classes' => [
+        Collection::class,
+        Subscriber::class,
+    ],
 
 ];

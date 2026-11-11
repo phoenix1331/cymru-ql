@@ -23,7 +23,15 @@ export function Layout() {
                             </NavLink>
                         ))}
                     </nav>
-                    <a href="/graphiql" className="ml-auto font-display text-lg font-semibold text-graphql">
+                    <NavLink
+                        to="/live"
+                        className={({ isActive }) =>
+                            `ml-auto font-display text-lg font-semibold no-underline hover:text-pitch ${isActive ? 'text-pitch underline decoration-2' : 'text-slate-soft'}`
+                        }
+                    >
+                        Live
+                    </NavLink>
+                    <a href="/graphiql" className="font-display text-lg font-semibold text-graphql">
                         Query playground
                     </a>
                 </div>
