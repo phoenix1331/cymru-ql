@@ -22,6 +22,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Data objects | `app/Data/` | Readonly DTOs per file plus `DataFiles` (JSON read/write, path from `config/cymru.php` `data_path`) |
 | Import | `app/Console/Commands/CymruImport.php`, `app/Import/` | `cymru:import` evaluates the Over the Terraces `cymru.js` module with Node (`OttConfigReader`) and maps rows to clubs and grounds (`ClubImporter`). Source path: `--source` or `OTT_CYMRU_PATH`. `--enrich` fills gaps via `app/Import/Enrichment/` (Wikidata SPARQL, Nominatim reverse geocoding at 1 req/s); `overrides.json` applied last |
 | Distance matrix | `database/data/distances.json` | Ground x ground (47 x 47: 48 clubs, one shared ground) road km plus straight-line km, built by `cymru:import --distances` (`app/Import/Distances/`, one OSRM table request). Read via `DataFiles::distances()` (`DistanceMatrixData`). No OSRM calls at runtime |
+| Models | `app/Models/` | `League`, `Season`, `Ground`, `Club`, `ClubSeason` (club in a league for a season, final position). Route keys are slugs |
 | Domain services | `app/Services/` | Shared by REST and GraphQL so the comparison is fair |
 | REST | `routes/api.php`, API Resources | |
 | GraphQL | `graphql/schema.graphql` (Lighthouse) | Schema first, batch loading toggle, complexity and depth limits |
