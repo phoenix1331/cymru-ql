@@ -19,3 +19,9 @@ it('leaves extensions out when metrics are off', function () {
 
     $this->graphQL('{ seasons { slug } }')->assertOk()->assertJsonMissingPath('extensions.metrics');
 });
+
+it('keeps parsed queries out of the database so graphql pays no extra query', function () {
+    $lighthouse = require config_path('lighthouse.php');
+
+    expect($lighthouse['query_cache']['mode'])->toBe('opcache');
+});

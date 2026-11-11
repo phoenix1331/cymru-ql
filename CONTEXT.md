@@ -69,6 +69,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 | Requests are filed under the load active when they start | Late responses from a screen the user just toggled away from would otherwise inflate the new load |
 | Live screen (`/live`, `resources/js/pages/LivePage.tsx`) | GraphQL only: lists fixtures in play and subscribes each card to `matchUpdated`; client transport in `resources/js/graphql/subscriptions.ts` (urql `subscriptionExchange`, POST then `pusher-js` on the private channel Lighthouse returns, auth via `/graphql/subscriptions/auth`). Match events come with the subscription to keep the list query under the complexity limit |
 | Cache `serializable_classes` allows `Collection` and Lighthouse `Subscriber` only | Laravel 13 refuses to unserialise cached objects by default; Lighthouse's subscriber storage needs these two, everything else stays blocked |
+| Lighthouse query cache in `opcache` mode | The default `store` mode used the database cache and added one query to every GraphQL request, which skewed the comparison against REST |
 | No Redis | Native setup stays PHP + MySQL + Node; Lighthouse subscription storage and the queue use the database |
 | Generated placeholder crests (`resources/js/components/Crest.tsx`) | Avoid shipping third-party club badges: SVG shield in the club colour, pattern hashed from the slug, initials in contrasting text |
 

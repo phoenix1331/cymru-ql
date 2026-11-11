@@ -157,7 +157,10 @@ return [
          * - opcache: store parsed queries in PHP files on the local filesystem to leverage OPcache
          * - hybrid: leverage OPcache, but use a shared cache store when local files are not found
          */
-        'mode' => env('LIGHTHOUSE_QUERY_CACHE_MODE', 'store'),
+        // opcache: parsed queries are kept as PHP files in bootstrap/cache. The
+        // `store` mode would use the database cache here and add a query to
+        // every GraphQL request, skewing the REST comparison.
+        'mode' => env('LIGHTHOUSE_QUERY_CACHE_MODE', 'opcache'),
 
         /*
          * Specifies the path where the PHP files are stored when using opcache or hybrid mode.
