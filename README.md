@@ -1,5 +1,8 @@
 # CymruQL
 
+<img width="3148" height="1652" alt="Screenshot 2026-11-11 211307" src="https://github.com/user-attachments/assets/22f0041b-68fd-4f3c-9396-761d12b04cca" />
+
+
 Welsh football data (Cymru Premier, North and South) served over both REST and GraphQL from one Laravel 13 app, with a React UI that shows what each API costs side by side: requests, payload, timing and database queries.
 
 ## What this demonstrates
@@ -12,8 +15,8 @@ Loading the Caernarfon Town page, on seeded local data:
 |---|---|---|
 | HTTP requests | 20 | 1 |
 | Data received | 20.9 kB | 8.0 kB |
-| Database queries | 52 | 21 |
-| Database queries, batch loading off | | 50 |
+| Database queries | 52 | 19 |
+| Database queries, batch loading off | | 49 |
 
 The screen is identical in both modes. Each API is used the way it is meant to be used: REST resources reference related resources by link, so the client follows those links (club, then its seasons, then its ground, table and away distances, then each away ground); GraphQL asks for the whole shape in one query. Both sides call the same Laravel service classes, so the difference is the API, not the code behind it.
 
