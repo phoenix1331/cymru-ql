@@ -1,0 +1,542 @@
+[
+    {
+        "club": "the-new-saints",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 1
+    },
+    {
+        "club": "connahs-quay-nomads",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 2
+    },
+    {
+        "club": "barry-town-united",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 3
+    },
+    {
+        "club": "caernarfon-town",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 4
+    },
+    {
+        "club": "colwyn-bay",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 5
+    },
+    {
+        "club": "penybont",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 6
+    },
+    {
+        "club": "haverfordwest-county",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 7
+    },
+    {
+        "club": "briton-ferry-llansawel",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 8
+    },
+    {
+        "club": "cardiff-met",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 9
+    },
+    {
+        "club": "flint-town-united",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 10
+    },
+    {
+        "club": "bala-town",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 11
+    },
+    {
+        "club": "llanelli-town",
+        "season": "2025-26",
+        "league": "cymru-premier",
+        "position": 12
+    },
+    {
+        "club": "llandudno",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 1
+    },
+    {
+        "club": "airbus-uk-broughton",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 2
+    },
+    {
+        "club": "holywell-town",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 3
+    },
+    {
+        "club": "newtown",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 4
+    },
+    {
+        "club": "rhyl",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 5
+    },
+    {
+        "club": "guilsfield",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 6
+    },
+    {
+        "club": "mold-alexandra",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 7
+    },
+    {
+        "club": "denbigh-town",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 8
+    },
+    {
+        "club": "caersws",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 9
+    },
+    {
+        "club": "brickfield-rangers",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 10
+    },
+    {
+        "club": "holyhead-hotspur",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 11
+    },
+    {
+        "club": "penrhyncoch",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 12
+    },
+    {
+        "club": "buckley-town",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 13
+    },
+    {
+        "club": "gresford-athletic",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 15
+    },
+    {
+        "club": "ruthin-town",
+        "season": "2025-26",
+        "league": "cymru-north",
+        "position": 16
+    },
+    {
+        "club": "trefelin-bgc",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 1
+    },
+    {
+        "club": "cambrian-united",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 2
+    },
+    {
+        "club": "ammanford",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 3
+    },
+    {
+        "club": "caerau-ely",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 4
+    },
+    {
+        "club": "carmarthen-town",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 5
+    },
+    {
+        "club": "aberystwyth-town",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 6
+    },
+    {
+        "club": "cardiff-draconians",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 7
+    },
+    {
+        "club": "llantwit-major",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 8
+    },
+    {
+        "club": "treowen-stars",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 9
+    },
+    {
+        "club": "newport-city",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 10
+    },
+    {
+        "club": "pontypridd-united",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 11
+    },
+    {
+        "club": "afan-lido",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 12
+    },
+    {
+        "club": "trethomas-bluebirds",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 13
+    },
+    {
+        "club": "baglan-dragons",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 14
+    },
+    {
+        "club": "ynyshir-albions",
+        "season": "2025-26",
+        "league": "cymru-south",
+        "position": 15
+    },
+    {
+        "club": "the-new-saints",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "connahs-quay-nomads",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "caernarfon-town",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "barry-town-united",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "penybont",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "cardiff-met",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "haverfordwest-county",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "llandudno",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "airbus-uk-broughton",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "colwyn-bay",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "flint-town-united",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "holywell-town",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "ammanford",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "briton-ferry-llansawel",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "cambrian-united",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "trefelin-bgc",
+        "season": "2026-27",
+        "league": "cymru-premier",
+        "position": null
+    },
+    {
+        "club": "brickfield-rangers",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "bangor-1876",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "bala-town",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "newtown",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "mold-alexandra",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "porthmadog",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "caersws",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "guilsfield",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "denbigh-town",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "rhyl",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "buckley-town",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "ruthin-town",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "holyhead-hotspur",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "llanuwchllyn",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "penrhyncoch",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "gresford-athletic",
+        "season": "2026-27",
+        "league": "cymru-north",
+        "position": null
+    },
+    {
+        "club": "pure-swansea",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "pontypridd-united",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "carmarthen-town",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "baglan-dragons",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "aberystwyth-town",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "treowen-stars",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "ynyshir-albions",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "newport-city",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "afan-lido",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "trethomas-bluebirds",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "cardiff-draconians",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "caerau-ely",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "caerphilly-athletic",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "pontardawe-town",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "llanelli-town",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    },
+    {
+        "club": "llantwit-major",
+        "season": "2026-27",
+        "league": "cymru-south",
+        "position": null
+    }
+]

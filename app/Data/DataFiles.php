@@ -30,6 +30,22 @@ final readonly class DataFiles
         return rtrim($this->directory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$file;
     }
 
+    public function exists(string $file): bool
+    {
+        return is_file($this->path($file));
+    }
+
+    public function currentSeason(): SeasonData
+    {
+        foreach ($this->seasons() as $season) {
+            if ($season->isCurrent) {
+                return $season;
+            }
+        }
+
+        throw new RuntimeException('No season is marked as current in '.self::SEASONS.'.');
+    }
+
     /**
      * @return array<array-key, mixed>
      */
