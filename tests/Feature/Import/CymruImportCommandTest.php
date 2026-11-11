@@ -6,6 +6,7 @@ use App\Data\ClubData;
 use App\Data\ClubSeasonData;
 use App\Data\DataFiles;
 use App\Data\GroundData;
+use App\Import\Distances\OsrmClient;
 use App\Import\Enrichment\NominatimClient;
 use App\Import\Enrichment\WikidataClient;
 use App\Import\OttConfigReader;
@@ -159,4 +160,26 @@ it('applies hand-maintained overrides last', function () {
     $this->artisan('cymru:import', ['--source' => base_path('tests/Fixtures/ott-cymru.js')])->assertSuccessful();
 
     expect(collect(app(DataFiles::class)->clubs())->firstWhere('slug', 'caernarfon-town')->founded)->toBe(1876);
+});
+
+it('rebuilds the distance matrix when asked', function () {
+    Http::fake([OsrmClient::ENDPOINT.'*' => Http::response(['code' => 'Ok', 'distances' => [
+        [0, 1000, 2000], [1000, 0, 3000], [2000, 3000, 0],
+    ]])]);
+
+    $this->artisan('cymru:import', ['--source' => base_path('tests/Fixtures/ott-cymru.js'), '--distances' => true])
+        ->expectsOutputToContain('Ground pairs measured')
+        ->doesntExpectOutputToContain('does not match the imported grounds')
+        ->assertSuccessful();
+
+    $matrix = app(DataFiles::class)->distances();
+
+    expect($matrix->grounds)->toBe(['the-oval-caernarfon', 'the-oval-ynyshir', 'centre-for-sporting-excellence-ystrad-mynach'])
+        ->and($matrix->between('the-oval-ynyshir', 'centre-for-sporting-excellence-ystrad-mynach')['road_km'])->toBe(3.0);
+});
+
+it('warns when the distance matrix no longer matches the grounds', function () {
+    $this->artisan('cymru:import', ['--source' => base_path('tests/Fixtures/ott-cymru.js')])
+        ->expectsOutputToContain('does not match the imported grounds')
+        ->assertSuccessful();
 });

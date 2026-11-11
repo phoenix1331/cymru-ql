@@ -125,6 +125,14 @@ final readonly class DataFiles
         return array_map(ClubSeasonData::fromArray(...), $this->rows(self::CLUB_SEASONS));
     }
 
+    public function distances(): DistanceMatrixData
+    {
+        /** @var array<string, mixed> $data */
+        $data = $this->read(self::DISTANCES);
+
+        return DistanceMatrixData::fromArray($data);
+    }
+
     /**
      * @param  list<LeagueData|SeasonData|GroundData|ClubData|ClubSeasonData>  $items
      */

@@ -9,6 +9,7 @@ use App\Data\DataFiles;
 use App\Data\GroundData;
 use App\Import\ClubImporter;
 use App\Import\ClubSeasonImporter;
+use App\Import\Distances\DistanceMatrixBuilder;
 use App\Import\Enrichment\Enricher;
 use App\Import\OttConfigReader;
 use App\Import\Overrides;
@@ -21,7 +22,8 @@ use RuntimeException;
 
 #[Signature('cymru:import
     {--source= : Path to the Over the Terraces src/data/cymru.js (defaults to OTT_CYMRU_PATH)}
-    {--enrich : Fill gaps from Wikidata and OpenStreetMap (network access, slow)}')]
+    {--enrich : Fill gaps from Wikidata and OpenStreetMap (network access, slow)}
+    {--distances : Rebuild the ground distance matrix from OSRM (network access)}')]
 #[Description('Regenerate database/data JSON from the Over the Terraces Cymru config')]
 final class CymruImport extends Command
 {
@@ -62,6 +64,13 @@ final class CymruImport extends Command
                 : new Overrides;
             $clubs = $overrides->applyToClubs($clubs);
             $grounds = $overrides->applyToGrounds($grounds);
+
+            if ($this->option('distances')) {
+                $distances = app(DistanceMatrixBuilder::class)->build($grounds);
+
+                $this->components->twoColumnDetail('Ground pairs measured', (string) (count($grounds) * (count($grounds) - 1)));
+                $this->components->twoColumnDetail('Pairs using the straight line fallback', (string) $distances['fallbacks']);
+            }
         } catch (RuntimeException|InvalidArgumentException|RequestException $exception) {
             $this->components->error($exception->getMessage());
 
@@ -71,6 +80,12 @@ final class CymruImport extends Command
         $files->writeRows(DataFiles::GROUNDS, $grounds);
         $files->writeRows(DataFiles::CLUBS, $clubs);
         $files->writeRows(DataFiles::CLUB_SEASONS, $memberships);
+
+        if (isset($distances)) {
+            $files->write(DataFiles::DISTANCES, $distances['matrix']->toArray());
+        }
+
+        $this->warnIfDistancesAreStale($files, $grounds);
 
         $this->components->info(sprintf(
             'Imported %d clubs, %d grounds and %s league membership into %s.',
@@ -119,6 +134,20 @@ final class CymruImport extends Command
             fn (GroundData $ground): GroundData => $existing->has($ground->slug) ? $ground->fillMissingFrom($existing[$ground->slug]) : $ground,
             $grounds,
         );
+    }
+
+    /**
+     * @param  list<GroundData>  $grounds
+     */
+    private function warnIfDistancesAreStale(DataFiles $files, array $grounds): void
+    {
+        $expected = array_map(fn (GroundData $ground): string => $ground->slug, $grounds);
+
+        if ($files->exists(DataFiles::DISTANCES) && $files->distances()->grounds === $expected) {
+            return;
+        }
+
+        $this->components->warn('distances.json does not match the imported grounds. Run cymru:import --distances.');
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Data\DataFiles;
+use App\Import\Distances\OsrmClient;
 use App\Import\Enrichment\NominatimClient;
 use App\Import\Enrichment\WikidataClient;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             WikidataClient::class,
             fn (): WikidataClient => new WikidataClient((string) config('cymru.http_user_agent')),
+        );
+
+        $this->app->bind(
+            OsrmClient::class,
+            fn (): OsrmClient => new OsrmClient((string) config('cymru.http_user_agent')),
         );
 
         $this->app->bind(
