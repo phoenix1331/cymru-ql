@@ -1,0 +1,7 @@
+// Trimmed Over the Terraces style config used by the import tests.
+export const CLUBS = [
+  { club: 'Caernarfon Town', slug: 'caernarfon-town', stadium: 'The Oval', region: 'Cymru', division: 'Cymru Premier', city: 'Caernarfon', lat: 53.13476, lng: -4.26744, capacity: 3000, opened: 1888, nickname: 'The Canaries', colour: '#F1B434', description: 'By the Menai Strait.', badge: 'badges/cymru/caernarfon-town.png' },
+  { club: 'Ynyshir Albions', slug: 'ynyshir-albions', stadium: 'The Oval', region: 'Cymru', division: 'Cymru South', city: 'Ynyshir', lat: 51.62432, lng: -3.40912, capacity: 600, opened: null, nickname: 'Albions', colour: '#003DA5', description: 'In the Rhondda.', badge: 'badges/cymru/ynyshir-albions.png' }, // UNVERIFIED
+  { club: 'Trethomas Bluebirds', slug: 'trethomas-bluebirds', stadium: 'Centre for Sporting Excellence', region: 'Cymru', division: 'Cymru South', city: 'Ystrad Mynach', lat: 51.63497, lng: -3.23738, capacity: 1000, opened: null, nickname: 'Bluebirds', colour: '#0057B8', description: 'Shared ground.', badge: 'badges/cymru/trethomas-bluebirds.png' },
+  { club: 'Caerphilly Athletic', slug: 'caerphilly-athletic', stadium: 'Centre for Sporting Excellence', region: 'Cymru', division: 'Cymru South', city: 'Ystrad Mynach', lat: 51.63537, lng: -3.23739, capacity: 1000, opened: null, nickname: null, colour: '#C8102E', description: 'Shared ground.', badge: 'badges/cymru/caerphilly-athletic.png' },
+]

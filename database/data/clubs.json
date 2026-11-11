@@ -1,0 +1,386 @@
+[
+    {
+        "slug": "the-new-saints",
+        "name": "The New Saints",
+        "ground": "park-hall-oswestry",
+        "colour": "#003DA5",
+        "nickname": "The Saints",
+        "founded": null
+    },
+    {
+        "slug": "connahs-quay-nomads",
+        "name": "Connah's Quay Nomads",
+        "ground": "the-deeside-stadium-connahs-quay",
+        "colour": "#003DA5",
+        "nickname": "The Nomads",
+        "founded": null
+    },
+    {
+        "slug": "caernarfon-town",
+        "name": "Caernarfon Town",
+        "ground": "the-oval-caernarfon",
+        "colour": "#F1B434",
+        "nickname": "The Canaries",
+        "founded": null
+    },
+    {
+        "slug": "barry-town-united",
+        "name": "Barry Town United",
+        "ground": "jenner-park-barry",
+        "colour": "#F1B434",
+        "nickname": "The Linnets",
+        "founded": null
+    },
+    {
+        "slug": "penybont",
+        "name": "Penybont",
+        "ground": "bryntirion-park-bridgend",
+        "colour": "#F1B434",
+        "nickname": "The Bont",
+        "founded": null
+    },
+    {
+        "slug": "cardiff-met",
+        "name": "Cardiff Metropolitan University",
+        "ground": "cyncoed-campus-cardiff",
+        "colour": "#8C1C13",
+        "nickname": "The Archers",
+        "founded": null
+    },
+    {
+        "slug": "haverfordwest-county",
+        "name": "Haverfordwest County",
+        "ground": "bridge-meadow-haverfordwest",
+        "colour": "#003DA5",
+        "nickname": "The Bluebirds",
+        "founded": null
+    },
+    {
+        "slug": "llandudno",
+        "name": "Llandudno Town",
+        "ground": "maesdu-park-llandudno",
+        "colour": "#003DA5",
+        "nickname": "The Tudno",
+        "founded": null
+    },
+    {
+        "slug": "airbus-uk-broughton",
+        "name": "Airbus UK Broughton",
+        "ground": "the-airfield-broughton",
+        "colour": "#003DA5",
+        "nickname": "The Wingmakers",
+        "founded": null
+    },
+    {
+        "slug": "colwyn-bay",
+        "name": "Colwyn Bay",
+        "ground": "llanelian-road-colwyn-bay",
+        "colour": "#003DA5",
+        "nickname": "The Seagulls",
+        "founded": null
+    },
+    {
+        "slug": "flint-town-united",
+        "name": "Flint Town United",
+        "ground": "cae-y-castell-flint",
+        "colour": "#C0C0C0",
+        "nickname": "The Silkmen",
+        "founded": null
+    },
+    {
+        "slug": "holywell-town",
+        "name": "Holywell Town",
+        "ground": "halkyn-road-holywell",
+        "colour": "#003DA5",
+        "nickname": "The Wellmen",
+        "founded": null
+    },
+    {
+        "slug": "ammanford",
+        "name": "Ammanford",
+        "ground": "the-recreation-ground-ammanford",
+        "colour": "#000000",
+        "nickname": "The Ammans",
+        "founded": null
+    },
+    {
+        "slug": "briton-ferry-llansawel",
+        "name": "Briton Ferry Llansawel",
+        "ground": "old-road-briton-ferry",
+        "colour": "#000000",
+        "nickname": "The Ferry",
+        "founded": null
+    },
+    {
+        "slug": "cambrian-united",
+        "name": "Cambrian & Clydach",
+        "ground": "king-george-v-new-field-clydach-vale",
+        "colour": "#F1B434",
+        "nickname": "The Cam",
+        "founded": null
+    },
+    {
+        "slug": "trefelin-bgc",
+        "name": "Trefelin BGC",
+        "ground": "ynys-park-port-talbot",
+        "colour": "#D50032",
+        "nickname": "Trefelin",
+        "founded": null
+    },
+    {
+        "slug": "brickfield-rangers",
+        "name": "Brickfield Rangers",
+        "ground": "clywedog-park-wrexham",
+        "colour": "#D50032",
+        "nickname": "The Brickies",
+        "founded": null
+    },
+    {
+        "slug": "bangor-1876",
+        "name": "Bangor 1876",
+        "ground": "nantporth-bangor",
+        "colour": "#003DA5",
+        "nickname": "The Citizens",
+        "founded": null
+    },
+    {
+        "slug": "bala-town",
+        "name": "Bala Town",
+        "ground": "maes-tegid-bala",
+        "colour": "#003DA5",
+        "nickname": "The Lakesiders",
+        "founded": null
+    },
+    {
+        "slug": "newtown",
+        "name": "Newtown",
+        "ground": "latham-park-newtown",
+        "colour": "#D50032",
+        "nickname": "The Robins",
+        "founded": null
+    },
+    {
+        "slug": "mold-alexandra",
+        "name": "Mold Alexandra",
+        "ground": "alyn-park-mold",
+        "colour": "#D50032",
+        "nickname": "The Dragons",
+        "founded": null
+    },
+    {
+        "slug": "porthmadog",
+        "name": "Porthmadog",
+        "ground": "y-traeth-porthmadog",
+        "colour": "#D50032",
+        "nickname": "Port",
+        "founded": null
+    },
+    {
+        "slug": "caersws",
+        "name": "Caersws",
+        "ground": "the-recreation-ground-caersws",
+        "colour": "#003DA5",
+        "nickname": "The Bluebirds",
+        "founded": null
+    },
+    {
+        "slug": "guilsfield",
+        "name": "Guilsfield",
+        "ground": "community-centre-ground-guilsfield",
+        "colour": "#00A650",
+        "nickname": "The Guils",
+        "founded": null
+    },
+    {
+        "slug": "denbigh-town",
+        "name": "Denbigh Town",
+        "ground": "central-park-denbigh",
+        "colour": "#000000",
+        "nickname": "The Cadets",
+        "founded": null
+    },
+    {
+        "slug": "rhyl",
+        "name": "Rhyl",
+        "ground": "belle-vue-rhyl",
+        "colour": "#FFFFFF",
+        "nickname": "The Lilywhites",
+        "founded": null
+    },
+    {
+        "slug": "buckley-town",
+        "name": "Buckley Town",
+        "ground": "globe-way-buckley",
+        "colour": "#00A650",
+        "nickname": "The Bucks",
+        "founded": null
+    },
+    {
+        "slug": "ruthin-town",
+        "name": "Ruthin Town",
+        "ground": "memorial-playing-fields-ruthin",
+        "colour": "#003DA5",
+        "nickname": "The Ruthinians",
+        "founded": null
+    },
+    {
+        "slug": "holyhead-hotspur",
+        "name": "Holyhead Hotspur",
+        "ground": "the-new-oval-holyhead",
+        "colour": "#003DA5",
+        "nickname": "The Bees",
+        "founded": null
+    },
+    {
+        "slug": "llanuwchllyn",
+        "name": "Llanuwchllyn",
+        "ground": "cae-llan-llanuwchllyn",
+        "colour": "#00A650",
+        "nickname": null,
+        "founded": null
+    },
+    {
+        "slug": "penrhyncoch",
+        "name": "Penrhyncoch",
+        "ground": "cae-baker-penrhyn-coch",
+        "colour": "#00A650",
+        "nickname": "The Roosters",
+        "founded": null
+    },
+    {
+        "slug": "gresford-athletic",
+        "name": "Gresford Athletic",
+        "ground": "the-rock-gresford",
+        "colour": "#003DA5",
+        "nickname": "The Colliers",
+        "founded": null
+    },
+    {
+        "slug": "pure-swansea",
+        "name": "Pure Swansea",
+        "ground": "swansea-bay-sports-park-swansea",
+        "colour": "#000000",
+        "nickname": null,
+        "founded": null
+    },
+    {
+        "slug": "pontypridd-united",
+        "name": "Pontypridd United",
+        "ground": "usw-sport-park-pontypridd",
+        "colour": "#8C1C13",
+        "nickname": "The Dragons",
+        "founded": null
+    },
+    {
+        "slug": "carmarthen-town",
+        "name": "Carmarthen Town",
+        "ground": "richmond-park-carmarthen",
+        "colour": "#F1B434",
+        "nickname": "The Old Gold",
+        "founded": null
+    },
+    {
+        "slug": "baglan-dragons",
+        "name": "Baglan Dragons",
+        "ground": "evans-bevan-playing-fields-port-talbot",
+        "colour": "#D50032",
+        "nickname": "The Dragons",
+        "founded": null
+    },
+    {
+        "slug": "aberystwyth-town",
+        "name": "Aberystwyth Town",
+        "ground": "park-avenue-aberystwyth",
+        "colour": "#00A650",
+        "nickname": "The Seasiders",
+        "founded": null
+    },
+    {
+        "slug": "treowen-stars",
+        "name": "Treowen Stars",
+        "ground": "bush-park-newbridge",
+        "colour": "#F1B434",
+        "nickname": "The Stars",
+        "founded": null
+    },
+    {
+        "slug": "ynyshir-albions",
+        "name": "Ynyshir Albions",
+        "ground": "the-oval-ynyshir",
+        "colour": "#003DA5",
+        "nickname": "The Buns",
+        "founded": null
+    },
+    {
+        "slug": "newport-city",
+        "name": "Newport City",
+        "ground": "newport-stadium-newport",
+        "colour": "#F1B434",
+        "nickname": "The Steelmen",
+        "founded": null
+    },
+    {
+        "slug": "afan-lido",
+        "name": "Afan Lido",
+        "ground": "marston-stadium-port-talbot",
+        "colour": "#D50032",
+        "nickname": "The Lido",
+        "founded": null
+    },
+    {
+        "slug": "trethomas-bluebirds",
+        "name": "Trethomas Bluebirds",
+        "ground": "centre-for-sporting-excellence-ystrad-mynach",
+        "colour": "#003DA5",
+        "nickname": "The Bluebirds",
+        "founded": null
+    },
+    {
+        "slug": "cardiff-draconians",
+        "name": "Cardiff Draconians",
+        "ground": "lydstep-park-cardiff",
+        "colour": "#8C1C13",
+        "nickname": "The Draconians",
+        "founded": null
+    },
+    {
+        "slug": "caerau-ely",
+        "name": "Caerau Ely",
+        "ground": "cwrt-yr-ala-cardiff",
+        "colour": "#D50032",
+        "nickname": null,
+        "founded": null
+    },
+    {
+        "slug": "caerphilly-athletic",
+        "name": "Caerphilly Athletic",
+        "ground": "centre-for-sporting-excellence-ystrad-mynach",
+        "colour": "#000000",
+        "nickname": "The A's",
+        "founded": null
+    },
+    {
+        "slug": "pontardawe-town",
+        "name": "Pontardawe Town",
+        "ground": "parc-ynysderw-pontardawe",
+        "colour": "#003DA5",
+        "nickname": "Ponty",
+        "founded": null
+    },
+    {
+        "slug": "llanelli-town",
+        "name": "Llanelli Town",
+        "ground": "stebonheath-park-llanelli",
+        "colour": "#D50032",
+        "nickname": "The Reds",
+        "founded": null
+    },
+    {
+        "slug": "llantwit-major",
+        "name": "Llantwit Major",
+        "ground": "windmill-lane-llantwit-major",
+        "colour": "#003DA5",
+        "nickname": "Windmill Army",
+        "founded": null
+    }
+]
