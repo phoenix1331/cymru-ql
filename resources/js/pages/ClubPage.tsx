@@ -1,7 +1,24 @@
 import { useParams } from 'react-router';
+import { useScreenLoad } from '@/api/recorder';
+import { useSettings } from '@/api/settings';
+import { ScreenState } from '@/components/ScreenState';
+import { ClubView } from '@/screens/club/ClubView';
+import { useClubGraphQL } from '@/screens/club/useClubGraphQL';
+import { useClubRest } from '@/screens/club/useClubRest';
+
+function ClubFromRest({ slug }: { slug: string }) {
+    return <ScreenState state={useClubRest(slug)} what="club">{(club) => <ClubView club={club} />}</ScreenState>;
+}
+
+function ClubFromGraphQL({ slug }: { slug: string }) {
+    return <ScreenState state={useClubGraphQL(slug)} what="club">{(club) => <ClubView club={club} />}</ScreenState>;
+}
 
 export function ClubPage() {
-    const { slug } = useParams();
+    const slug = useParams().slug ?? '';
+    const { source } = useSettings();
 
-    return <h1 className="text-5xl">Club: {slug}</h1>;
+    useScreenLoad(source, `Club: ${slug}`);
+
+    return source === 'rest' ? <ClubFromRest key={slug} slug={slug} /> : <ClubFromGraphQL key={slug} slug={slug} />;
 }

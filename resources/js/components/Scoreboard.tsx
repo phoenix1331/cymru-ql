@@ -16,7 +16,7 @@ const ROWS: Row[] = [
 
 function Cell({ summary, other, row }: { summary: LoadSummary | null; other: LoadSummary | null; row: Row }) {
     if (!summary) {
-        return <td className="px-3 py-2 text-right font-display text-3xl text-white/35">-</td>;
+        return <td className="px-3 py-2 text-right font-display text-2xl text-white/35">-</td>;
     }
 
     const value = row.value(summary);
@@ -24,7 +24,7 @@ function Cell({ summary, other, row }: { summary: LoadSummary | null; other: Loa
 
     return (
         <td className="px-3 py-2 text-right">
-            <span className={`font-display text-3xl font-semibold ${better ? 'text-white' : 'text-white/70'}`}>{row.format(value)}</span>
+            <span className={`whitespace-nowrap font-display text-2xl font-semibold ${better ? 'text-white' : 'text-white/70'}`}>{row.format(value)}</span>
             {better && <span className="sr-only"> (lower)</span>}
         </td>
     );

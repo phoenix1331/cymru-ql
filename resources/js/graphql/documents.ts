@@ -15,3 +15,74 @@ export const LeaguesDocument = graphql(`
         }
     }
 `);
+
+export const ClubPageDocument = graphql(`
+    query ClubPage($slug: String!) {
+        club(slug: $slug) {
+            slug
+            name
+            nickname
+            colour
+            founded
+            ground {
+                slug
+                name
+                town
+                capacity
+                opened
+            }
+            seasons {
+                position
+                season {
+                    slug
+                    name
+                }
+                league {
+                    slug
+                    name
+                    tier
+                }
+            }
+            league {
+                league {
+                    slug
+                    name
+                }
+                season {
+                    name
+                }
+                table {
+                    ...TableRowFields
+                }
+            }
+            awayTrips {
+                roadKm
+                to {
+                    slug
+                    name
+                    town
+                    clubs {
+                        slug
+                        name
+                    }
+                }
+            }
+        }
+    }
+
+    fragment TableRowFields on TableRow {
+        position
+        played
+        won
+        drawn
+        lost
+        goalDifference
+        points
+        form
+        club {
+            slug
+            name
+            colour
+        }
+    }
+`);
