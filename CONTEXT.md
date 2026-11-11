@@ -72,7 +72,7 @@ Welsh football data (Cymru Premier, Cymru North, Cymru South: 48 clubs) served o
 
 ## Commands
 
-**composer**: setup | dev | test | test:coverage | lint | analyse
+**composer**: setup (install, `.env`, key, migrate --seed, npm install, hooks, build) | dev (serve :8000, reverb :8080, queue, cymru:simulate, vite via `concurrently`) | test | test:coverage | lint | analyse
 **npm**: run prepare (activate git hooks) | run dev | run build | run lint | run typecheck | run codegen
 **artisan**: migrate | db:seed | cymru:import [--enrich] [--distances] | cymru:reset [--as-of=] | cymru:simulate [--tick=] [--pause=] [--rounds=]
 **pest**: ./vendor/bin/pest | ./vendor/bin/pest --coverage --min=90
