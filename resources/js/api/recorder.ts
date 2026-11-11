@@ -16,6 +16,9 @@ export interface RequestRecord {
     bytes: number;
     /** Round trip measured in the browser, in milliseconds. */
     durationMs: number;
+    /** performance.now() when the request started and finished. */
+    startedAt: number;
+    endedAt: number;
     /** Database queries the server ran for this request. */
     queryCount: number | null;
     /** Time the server spent in the database, in milliseconds. */
@@ -34,17 +37,28 @@ export interface ScreenLoad {
 interface RecorderState {
     load: ScreenLoad | null;
     records: RequestRecord[];
+    /** Latest load id for each screen and API, keyed "label|api". */
+    latest: Record<string, number>;
 }
 
 const MAX_RECORDS = 200;
 
-export const recorder = createStore<RecorderState>({ load: null, records: [] });
+export const recorder = createStore<RecorderState>({ load: null, records: [], latest: {} });
 
 let nextLoadId = 1;
 let nextRecordId = 1;
 
+export function screenKey(label: string, api: ApiSource): string {
+    return `${label}|${api}`;
+}
+
 export function beginLoad(api: ApiSource, label: string): void {
-    recorder.set((state) => ({ ...state, load: { id: nextLoadId++, api, label } }));
+    const id = nextLoadId++;
+    recorder.set((state) => ({
+        ...state,
+        load: { id, api, label },
+        latest: { ...state.latest, [screenKey(label, api)]: id },
+    }));
 }
 
 export function record(entry: Omit<RequestRecord, 'id' | 'loadId'>): void {
@@ -62,7 +76,45 @@ export function useScreenLoad(api: ApiSource, label: string): void {
     useLayoutEffect(() => beginLoad(api, label), [api, label]);
 }
 
-export function useCurrentLoad(): { load: ScreenLoad | null; records: RequestRecord[] } {
-    const { load, records } = useStore(recorder);
-    return { load, records: load ? records.filter((entry) => entry.loadId === load.id) : [] };
+export interface LoadSummary {
+    requests: number;
+    bytes: number;
+    /** Wall clock time from the first request starting to the last finishing. */
+    durationMs: number;
+    queryCount: number;
+}
+
+export function summarise(records: RequestRecord[]): LoadSummary | null {
+    if (records.length === 0) {
+        return null;
+    }
+
+    return {
+        requests: records.length,
+        bytes: records.reduce((total, entry) => total + entry.bytes, 0),
+        durationMs: Math.max(...records.map((entry) => entry.endedAt)) - Math.min(...records.map((entry) => entry.startedAt)),
+        queryCount: records.reduce((total, entry) => total + (entry.queryCount ?? 0), 0),
+    };
+}
+
+export interface ScreenComparison {
+    load: ScreenLoad | null;
+    records: RequestRecord[];
+    rest: LoadSummary | null;
+    graphql: LoadSummary | null;
+}
+
+/** The current screen load, plus the latest REST and GraphQL loads of the same screen. */
+export function useScreenComparison(): ScreenComparison {
+    const { load, records, latest } = useStore(recorder);
+
+    const forLoad = (id: number | undefined) => (id === undefined ? [] : records.filter((entry) => entry.loadId === id));
+    const latestFor = (api: ApiSource) => (load ? summarise(forLoad(latest[screenKey(load.label, api)])) : null);
+
+    return {
+        load,
+        records: forLoad(load?.id),
+        rest: latestFor('rest'),
+        graphql: latestFor('graphql'),
+    };
 }

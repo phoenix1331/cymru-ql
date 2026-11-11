@@ -3,7 +3,9 @@ import { instrumentedFetch } from './instrumentedFetch';
 
 export const queryClient = new QueryClient({
     defaultOptions: {
-        queries: { staleTime: 60_000, retry: false, refetchOnWindowFocus: false },
+        // Every screen load goes to the network so the comparison panel always
+        // shows real requests; in-flight duplicates are still shared.
+        queries: { staleTime: 0, gcTime: 0, retry: false, refetchOnWindowFocus: false },
     },
 });
 

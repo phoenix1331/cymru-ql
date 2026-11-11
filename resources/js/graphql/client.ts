@@ -11,6 +11,8 @@ export const graphqlClient = new Client({
     url: '/graphql',
     exchanges: [cacheExchange, fetchExchange],
     preferGetMethod: false,
+    // Match the REST client: no answers from cache, so each screen load is measured.
+    requestPolicy: 'network-only',
     fetch: (input, init) => instrumentedFetch('graphql', input, init),
     fetchOptions: () => ({
         headers: { 'X-Batchload': settings.get().batchload ? 'on' : 'off' },

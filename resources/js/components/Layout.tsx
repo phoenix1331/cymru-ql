@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from 'react-router';
 import { LEAGUES } from '@/leagues';
+import { ComparisonPanel } from './ComparisonPanel';
 
 export function Layout() {
     return (
@@ -25,9 +26,14 @@ export function Layout() {
                 </div>
             </header>
 
-            <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6">
-                <Outlet />
-            </main>
+            <div className="mx-auto grid w-full max-w-7xl flex-1 gap-10 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
+                <main className="min-w-0">
+                    <Outlet />
+                </main>
+                <div className="lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:self-start lg:overflow-y-auto">
+                    <ComparisonPanel />
+                </div>
+            </div>
 
             <footer className="border-t border-mist">
                 <p className="mx-auto max-w-7xl px-4 py-6 text-sm text-slate-soft sm:px-6">

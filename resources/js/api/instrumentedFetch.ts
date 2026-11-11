@@ -29,7 +29,7 @@ export async function instrumentedFetch(api: ApiSource, input: RequestInfo | URL
     const started = performance.now();
     const response = await fetch(input, init);
     const text = await response.clone().text();
-    const durationMs = performance.now() - started;
+    const ended = performance.now();
     const metrics = api === 'graphql' ? graphqlMetrics(text) : {};
 
     record({
@@ -39,7 +39,9 @@ export async function instrumentedFetch(api: ApiSource, input: RequestInfo | URL
         body: typeof init?.body === 'string' ? init.body : null,
         status: response.status,
         bytes: new TextEncoder().encode(text).length,
-        durationMs,
+        durationMs: ended - started,
+        startedAt: started,
+        endedAt: ended,
         queryCount: metrics.query_count ?? headerNumber(response, 'X-Query-Count'),
         queryTimeMs: metrics.query_time_ms ?? headerNumber(response, 'X-Query-Time-Ms'),
         batchload: api === 'graphql' ? (metrics.batchload ?? null) : null,
