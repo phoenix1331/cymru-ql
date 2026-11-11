@@ -1,4 +1,4 @@
-import { record } from './recorder';
+import { currentLoadId, record } from './recorder';
 import type { ApiSource } from './settings';
 
 interface GraphQLMetrics {
@@ -26,6 +26,7 @@ function graphqlMetrics(text: string): GraphQLMetrics {
  * (REST) or extensions.metrics (GraphQL).
  */
 export async function instrumentedFetch(api: ApiSource, input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+    const loadId = currentLoadId();
     const started = performance.now();
     const response = await fetch(input, init);
     const text = await response.clone().text();
@@ -33,6 +34,7 @@ export async function instrumentedFetch(api: ApiSource, input: RequestInfo | URL
     const metrics = api === 'graphql' ? graphqlMetrics(text) : {};
 
     record({
+        loadId,
         api,
         method: init?.method ?? 'GET',
         url: typeof input === 'string' ? input : input instanceof URL ? input.href : input.url,

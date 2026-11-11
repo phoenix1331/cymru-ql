@@ -1,7 +1,24 @@
 import { useParams } from 'react-router';
+import { useScreenLoad } from '@/api/recorder';
+import { useSettings } from '@/api/settings';
+import { ScreenState } from '@/components/ScreenState';
+import { GroundView } from '@/screens/ground/GroundView';
+import { useGroundGraphQL } from '@/screens/ground/useGroundGraphQL';
+import { useGroundRest } from '@/screens/ground/useGroundRest';
+
+function GroundFromRest({ slug }: { slug: string }) {
+    return <ScreenState state={useGroundRest(slug)} what="ground">{(ground) => <GroundView ground={ground} />}</ScreenState>;
+}
+
+function GroundFromGraphQL({ slug }: { slug: string }) {
+    return <ScreenState state={useGroundGraphQL(slug)} what="ground">{(ground) => <GroundView ground={ground} />}</ScreenState>;
+}
 
 export function GroundPage() {
-    const { slug } = useParams();
+    const slug = useParams().slug ?? '';
+    const { source } = useSettings();
 
-    return <h1 className="text-5xl">Ground: {slug}</h1>;
+    useScreenLoad(source, `Ground: ${slug}`);
+
+    return source === 'rest' ? <GroundFromRest key={slug} slug={slug} /> : <GroundFromGraphQL key={slug} slug={slug} />;
 }

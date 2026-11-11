@@ -61,10 +61,15 @@ export function beginLoad(api: ApiSource, label: string): void {
     }));
 }
 
-export function record(entry: Omit<RequestRecord, 'id' | 'loadId'>): void {
+/** The load a request belongs to, taken when it starts so late responses are not misfiled. */
+export function currentLoadId(): number {
+    return recorder.get().load?.id ?? 0;
+}
+
+export function record(entry: Omit<RequestRecord, 'id'>): void {
     recorder.set((state) => ({
         ...state,
-        records: [...state.records, { ...entry, id: nextRecordId++, loadId: state.load?.id ?? 0 }].slice(-MAX_RECORDS),
+        records: [...state.records, { ...entry, id: nextRecordId++ }].slice(-MAX_RECORDS),
     }));
 }
 

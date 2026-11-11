@@ -111,3 +111,38 @@ export const LeaguePageDocument = graphql(`
         }
     }
 `);
+
+export const GroundPageDocument = graphql(`
+    query GroundPage($slug: String!) {
+        ground(slug: $slug) {
+            slug
+            name
+            town
+            address
+            capacity
+            opened
+            description
+            latitude
+            longitude
+            clubs {
+                slug
+                name
+                nickname
+                colour
+            }
+            nearby(limit: 8) {
+                roadKm
+                straightKm
+                to {
+                    slug
+                    name
+                    town
+                    clubs {
+                        slug
+                        name
+                    }
+                }
+            }
+        }
+    }
+`);
