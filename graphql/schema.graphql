@@ -55,6 +55,11 @@ type Query {
     fixture(id: ID! @eq): Fixture @find
 }
 
+type Subscription {
+    "Score, minute and status changes for one fixture while it is being played."
+    matchUpdated(fixtureId: ID!): Fixture
+}
+
 "A football season, August to May."
 type Season {
     slug: String!

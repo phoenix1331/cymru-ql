@@ -79,6 +79,11 @@ type Query {
   ): FixturePaginator!
 }
 
+type Subscription {
+  "Score, minute and status changes for one fixture while it is being played."
+  matchUpdated(fixtureId: ID!): Fixture
+}
+
 "An ISO 8601 date, e.g. `2026-08-01`."
 scalar Date
 
