@@ -5,6 +5,8 @@
 
 Welsh football data (Cymru Premier, North and South) served over both REST and GraphQL from one Laravel 13 app, with a React UI that shows what each API costs side by side: requests, payload, timing and database queries.
 
+Use it as a playground: open any screen, flip between REST and GraphQL, switch batch loading off, or write your own queries in GraphiQL, and see exactly what each choice costs. The clubs and grounds come from the [Cymru map](https://1331.co.uk/cymru) on [Over the Terraces](https://1331.co.uk/).
+
 ## What this demonstrates
 
 Most REST versus GraphQL comparisons are arguments. This one is a measurement. Every screen in the app (club, league table, ground) can load its data from either API, and a scoreboard beside it shows what that load cost. Toggle the API and the other side of the scoreboard fills in.
@@ -19,6 +21,15 @@ Loading the Caernarfon Town page, on seeded local data:
 | Database queries, batch loading off | | 49 |
 
 The screen is identical in both modes. Each API is used the way it is meant to be used: REST resources reference related resources by link, so the client follows those links (club, then its seasons, then its ground, table and away distances, then each away ground); GraphQL asks for the whole shape in one query. Both sides call the same Laravel service classes, so the difference is the API, not the code behind it.
+
+### Things to try
+
+- Open a club, toggle between REST and GraphQL, and compare the scoreboard. Expand any request in the log to see exactly what was sent
+- Switch batch loading off on a club page and watch the database queries climb
+- Open `/graphiql`: the example tabs run as they are, and every response reports its query count in `extensions.metrics`. Add or remove fields and see the cost change
+- Push a query past the depth or complexity limit and read the error
+- Run `php artisan cymru:simulate`, open `/live` and watch scores arrive over WebSockets
+- Send the requests in [`request.http`](request.http) and compare the `X-Query-Count` headers
 
 Along the way the project covers:
 
@@ -87,7 +98,7 @@ No API keys or external services are needed to run it.
 |---|---|
 | `php artisan cymru:reset` | Wipe and reseed the database, resimulating results up to now (`--as-of=2026-10-01` to pick a date) |
 | `php artisan cymru:simulate` | Play the next round live (`--tick=1` seconds per match minute, `--pause=30` between rounds, `--rounds=0` for no limit) |
-| `php artisan cymru:import` | Regenerate `database/data/*.json` from the Over the Terraces config (`--enrich` for Wikidata and OpenStreetMap, `--distances` for the OSRM matrix) |
+| `php artisan cymru:import` | Regenerate `database/data/*.json` from the [Over the Terraces](https://1331.co.uk/) config (`--enrich` for Wikidata and OpenStreetMap, `--distances` for the OSRM matrix) |
 | `composer test` | Pest |
 | `composer test:coverage` | Pest with coverage, 90% minimum on `app/` |
 | `composer lint` / `composer analyse` | Pint / Larastan |
@@ -158,19 +169,17 @@ Send `X-Batchload: off` to resolve relations without batch loading, and read `ex
 
 **Query limits that do not break tooling.** Complexity and depth limits reject abusive queries, but graphql-php counts introspection towards depth, and GraphiQL's own introspection query is deeper than any real query. A small subclass exempts `__schema` and `__type`, the same way the complexity rule already does.
 
-**Committed data, no network at runtime.** Clubs, grounds and coordinates come from the Over the Terraces Cymru config, enriched once from Wikidata and OpenStreetMap, with a 47 by 47 road distance matrix from one OSRM request (48 clubs, one shared ground). All of it is committed under `database/data/`, so seeding needs no network access. Hand-maintained corrections live in `overrides.json`, for example where Wikidata gives today's Rhyl the founding year of the club that folded in 2020.
+**Committed data, no network at runtime.** Clubs, grounds and coordinates come from the [Over the Terraces Cymru map](https://1331.co.uk/cymru) config, enriched once from Wikidata and OpenStreetMap, with a 47 by 47 road distance matrix from one OSRM request (48 clubs, one shared ground). All of it is committed under `database/data/`, so seeding needs no network access. Hand-maintained corrections live in `overrides.json`, for example where Wikidata gives today's Rhyl the founding year of the club that folded in 2020.
 
 **Deterministic simulation.** Results are simulated from club ratings (based on the previous season's finish) with a seed derived from the season and the pairing, so every install sees the same season and a live match ends exactly as the bulk simulation would. Only the as-of date decides which fixtures have been played.
 
 **Live without Redis.** Subscriptions broadcast through Reverb, with subscribers stored in the database cache. Laravel 13 refuses to unserialise cached objects by default, so `config/cache.php` allow-lists exactly the two classes Lighthouse stores. The simulator publishes directly rather than queuing a broadcast per match minute.
 
-**Native by design.** The brief was clone, `composer setup`, `composer dev`, with nothing but PHP, Node and MySQL. CI follows the same path on a plain Ubuntu runner using its preinstalled MySQL, then runs Playwright against `php artisan serve`.
-
 ## Data and credits
 
 | Data | Source | Licence |
 |---|---|---|
-| Clubs, grounds, coordinates, capacities, descriptions | Over the Terraces Cymru map (same author) | Original compilation |
+| Clubs, grounds, coordinates, capacities, descriptions | [Over the Terraces Cymru map](https://1331.co.uk/cymru) (same author) | Original compilation |
 | Founded years, some ground details | [Wikidata](https://www.wikidata.org) | CC0 |
 | Ground addresses | [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors | ODbL |
 | 2025/26 final positions | Wikipedia season articles | CC BY-SA 4.0 |
